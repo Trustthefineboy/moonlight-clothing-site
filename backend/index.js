@@ -126,6 +126,149 @@ let fabrics = [
     products: ['Two pieces'],
     whatsapp: '+2348168279958',
     categories: ['The Sacred Fabrics', 'The Capsule Editions', 'Unisex Divine Fits']
+  },
+  {
+    id: 12,
+    name: 'Brown Adinkra Kaftan',
+    price: 34000,
+    story: 'Rich brown kaftan with intricate Adinkra symbols. Traditional craftsmanship meets modern style.',
+    image: '/images/brown-adinkra-kaftan.jpg',
+    gender: 'Unisex',
+    products: ['Kaftan'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'Unisex Divine Fits']
+  },
+  {
+    id: 13,
+    name: 'Covenant Black Joggers',
+    price: 26000,
+    story: 'Comfortable black joggers with covenant styling. Perfect for casual comfort and streetwear.',
+    image: '/images/covenant-black-joggers.jpg',
+    gender: 'Unisex',
+    products: ['Palazzo casual trousers'],
+    whatsapp: '+2348168279958',
+    categories: ['The Ready-to-Wear Realm', 'Unisex Divine Fits']
+  },
+  {
+    id: 14,
+    name: 'Covenant Black Pants',
+    price: 27000,
+    story: 'Sleek black pants with covenant details. Versatile for both formal and casual occasions.',
+    image: '/images/covenant-black-pants.jpg',
+    gender: 'Unisex',
+    products: ['Palazzo casual trousers'],
+    whatsapp: '+2348168279958',
+    categories: ['The Ready-to-Wear Realm', 'Unisex Divine Fits']
+  },
+  {
+    id: 15,
+    name: 'Covenant White Shirt',
+    price: 23000,
+    story: 'Crisp white shirt from the Covenant collection. Clean lines with symbolic detailing.',
+    image: '/images/covenant-white-shirt.jpg',
+    gender: 'Unisex',
+    products: ['Shirts'],
+    whatsapp: '+2348168279958',
+    categories: ['The Ready-to-Wear Realm', 'Unisex Divine Fits']
+  },
+  {
+    id: 16,
+    name: 'Gangan Denim',
+    price: 29000,
+    story: 'Unique denim piece from the Gangan collection. Contemporary African fashion with durability.',
+    image: '/images/gangan-denim.jpg',
+    gender: 'Unisex',
+    products: ['Palazzo casual trousers'],
+    whatsapp: '+2348168279958',
+    categories: ['The Ready-to-Wear Realm', 'Limited Drop Series']
+  },
+  {
+    id: 17,
+    name: 'Guardian Blue Shorts',
+    price: 20000,
+    story: 'Comfortable blue shorts from the Guardian series. Perfect for warm weather and casual outings.',
+    image: '/images/guardian-blue-shorts.jpg',
+    gender: 'Unisex',
+    products: ['Palazzo casual trousers'],
+    whatsapp: '+2348168279958',
+    categories: ['The Ready-to-Wear Realm', 'Unisex Divine Fits']
+  },
+  {
+    id: 18,
+    name: 'Indigo Path Black Shirt',
+    price: 25000,
+    story: 'Mystical black shirt from the Indigo Path collection. Journey-inspired design for the modern explorer.',
+    image: '/images/indigo-path-black-shirt.jpg',
+    gender: 'Unisex',
+    products: ['Shirts'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'Limited Drop Series', 'Unisex Divine Fits']
+  },
+  {
+    id: 19,
+    name: 'Indigo Path White Kaftan',
+    price: 33000,
+    story: 'Elegant white kaftan from the Indigo Path collection. Spiritual journey meets elegant design.',
+    image: '/images/indigo-path-white-kaftan.jpg',
+    gender: 'Unisex',
+    products: ['Kaftan'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'Unisex Divine Fits']
+  },
+  {
+    id: 20,
+    name: 'Covenant Symbols Collection',
+    price: 38000,
+    story: 'Special piece featuring the complete Covenant symbols. A collector\'s item and statement piece.',
+    image: '/images/covenant-symbols.jpg',
+    gender: 'Unisex',
+    products: ['Shirts'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'Limited Drop Series', 'The Archive Pieces']
+  },
+  {
+    id: 21,
+    name: 'Guardian Blue Fabric',
+    price: 42000,
+    story: 'Premium blue fabric piece from the Guardian collection. Exclusive material with protective symbolism.',
+    image: '/images/guardian-blue-fabric.jpg',
+    gender: 'Unisex',
+    products: ['Kaftan'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'Limited Drop Series']
+  },
+  {
+    id: 22,
+    name: 'Bridge Between Worlds',
+    price: 58000,
+    story: 'Exclusive design connecting traditional and contemporary. A bridge between heritage and modern fashion.',
+    image: '/images/bridge-between-worlds.jpg',
+    gender: 'Unisex',
+    products: ['Kaftan'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'The Archive Pieces', 'Limited Drop Series']
+  },
+  {
+    id: 23,
+    name: 'Guardian of Earth',
+    price: 52000,
+    story: 'Majestic piece celebrating our connection to earth. Guardian collection\'s signature design.',
+    image: '/images/guardian-of-earth.jpg',
+    gender: 'Unisex',
+    products: ['Kaftan'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'The Archive Pieces', 'Limited Drop Series']
+  },
+  {
+    id: 24,
+    name: 'The Covenant of Symbols',
+    price: 60000,
+    story: 'Ultimate piece from the Covenant collection. Complete symbolic representation in premium fabric.',
+    image: '/images/the-convenant-of-symbols.jpg',
+    gender: 'Unisex',
+    products: ['Kaftan'],
+    whatsapp: '+2348168279958',
+    categories: ['The Sacred Fabrics', 'The Archive Pieces', 'The Capsule Editions']
   }
 ];
 
