@@ -64,20 +64,88 @@ export default function FabricList({ filter = {} }) {
     filtered = filtered.filter(f => f.products && f.products.includes(filter.type));
   }
 
+  // Sorting logic
+  if (filter.sortBy) {
+    filtered = [...filtered]; // Create a copy to avoid mutating original array
+    
+    switch (filter.sortBy) {
+      case 'price-low':
+        filtered.sort((a, b) => {
+          const priceA = typeof a.price === 'string' ? parseFloat(a.price.replace(/[^0-9.-]+/g, '')) : a.price;
+          const priceB = typeof b.price === 'string' ? parseFloat(b.price.replace(/[^0-9.-]+/g, '')) : b.price;
+          return priceA - priceB;
+        });
+        break;
+      case 'price-high':
+        filtered.sort((a, b) => {
+          const priceA = typeof a.price === 'string' ? parseFloat(a.price.replace(/[^0-9.-]+/g, '')) : a.price;
+          const priceB = typeof b.price === 'string' ? parseFloat(b.price.replace(/[^0-9.-]+/g, '')) : b.price;
+          return priceB - priceA;
+        });
+        break;
+      case 'name-asc':
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'name-desc':
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'newest':
+        filtered.sort((a, b) => b.id - a.id); // Assuming higher ID = newer
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', margin: 0, color: '#222' }}>Available Products</h2>
-        <div style={{ fontSize: '1rem', color: '#666', fontWeight: 'normal' }}>
-          {filtered.length} {filtered.length === 1 ? 'product' : 'products'} found
+        <h2 style={{ fontSize: '2rem', margin: 0, color: '#222' }}>
+          {filter.search ? `Search Results for "${filter.search}"` : 'Available Products'}
+        </h2>
+        <div style={{ 
+          fontSize: '1.1rem', 
+          color: '#666', 
+          fontWeight: 'bold',
+          backgroundColor: '#FFD700',
+          padding: '0.5rem 1rem',
+          borderRadius: '20px',
+          color: '#222'
+        }}>
+          {filtered.length} {filtered.length === 1 ? 'product' : 'products'}
         </div>
       </div>
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-        gap: '2rem'
-      }}>
-        {filtered.map(fabric => (
+
+      {/* No Results Message */}
+      {filtered.length === 0 ? (
+        <div style={{
+          textAlign: 'center',
+          padding: '4rem 2rem',
+          backgroundColor: '#f8f9fa',
+          borderRadius: '12px',
+          border: '2px dashed #ddd'
+        }}>
+          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔍</div>
+          <h3 style={{ fontSize: '1.5rem', color: '#222', marginBottom: '0.5rem' }}>
+            No Products Found
+          </h3>
+          <p style={{ color: '#666', fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+            Try adjusting your filters or search terms
+          </p>
+          <div style={{ color: '#888', fontSize: '0.9rem' }}>
+            {filter.search && <div>Search: "{filter.search}"</div>}
+            {filter.category && <div>Category: {filter.category}</div>}
+            {filter.gender && <div>Gender: {filter.gender}</div>}
+            {filter.type && <div>Type: {filter.type}</div>}
+          </div>
+        </div>
+      ) : (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: '2rem'
+        }}>
+          {filtered.map(fabric => (
           <div
             key={fabric.id}
             style={{
@@ -240,19 +308,8 @@ export default function FabricList({ filter = {} }) {
             </div>
           </div>
         ))}
-      </div>
-      {filtered.length === 0 && (
-        <div style={{ 
-          textAlign: 'center', 
-          padding: '3rem', 
-          color: '#666',
-          fontSize: '1.1rem'
-        }}>
-          No products found matching your filters.
         </div>
       )}
     </div>
   );
 }
-
-
