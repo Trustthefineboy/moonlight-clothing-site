@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import { useWishlist } from './WishlistContext';
+import { useToast } from './ToastContext';
 
 export default function QuickViewModal({ product, onClose }) {
   const [selectedSize, setSelectedSize] = useState('');
@@ -10,6 +11,7 @@ export default function QuickViewModal({ product, onClose }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { addToast } = useToast();
 
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const colors = ['Black', 'White', 'Blue', 'Brown', 'Green', 'Yellow', 'Multi-color'];
@@ -24,6 +26,7 @@ export default function QuickViewModal({ product, onClose }) {
       quantity
     };
     addToCart(cartItem);
+    addToast(`${product.name} added to cart! 🛒`, 'success');
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
   };
@@ -31,8 +34,10 @@ export default function QuickViewModal({ product, onClose }) {
   const handleWishlist = () => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
+      addToast('Removed from wishlist', 'info');
     } else {
       addToWishlist(product);
+      addToast(`${product.name} added to wishlist! 💝`, 'success');
     }
   };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import { useWishlist } from './WishlistContext';
+import { useToast } from './ToastContext';
 import ProductSkeleton from './ProductSkeleton';
 import QuickViewModal from './QuickViewModal';
 
@@ -12,6 +13,7 @@ export default function FabricList({ filter = {} }) {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { addToast } = useToast();
 
   useEffect(() => {
     fetch('http://localhost:5000/api/fabrics')
@@ -176,8 +178,10 @@ export default function FabricList({ filter = {} }) {
               onClick={() => {
                 if (isInWishlist(fabric.id)) {
                   removeFromWishlist(fabric.id);
+                  addToast('Removed from wishlist', 'info');
                 } else {
                   addToWishlist(fabric);
+                  addToast(`${fabric.name} added to wishlist! 💝`, 'success');
                 }
               }}
               style={{
@@ -283,7 +287,10 @@ export default function FabricList({ filter = {} }) {
                     👁️ Quick View
                   </button>
                   <button
-                    onClick={() => addToCart(fabric)}
+                    onClick={() => {
+                      addToCart(fabric);
+                      addToast(`${fabric.name} added to cart! 🛒`, 'success');
+                    }}
                     style={{
                       flex: 1,
                       background: '#FFD700',

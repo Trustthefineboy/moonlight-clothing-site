@@ -2,14 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useWishlist } from '../components/WishlistContext';
 import { useCart } from '../components/CartContext';
+import { useToast } from '../components/ToastContext';
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const { addToast } = useToast();
 
   const handleMoveToCart = (product) => {
     addToCart(product);
     removeFromWishlist(product.id);
+    addToast(`${product.name} moved to cart! 🛒`, 'success');
+  };
+
+  const handleClearAll = () => {
+    clearWishlist();
+    addToast('Wishlist cleared', 'info');
+  };
+
+  const handleRemove = (product) => {
+    removeFromWishlist(product.id);
+    addToast(`${product.name} removed from wishlist`, 'info');
   };
 
   if (wishlist.length === 0) {
@@ -73,7 +86,7 @@ export default function Wishlist() {
         </h1>
         {wishlist.length > 0 && (
           <button
-            onClick={clearWishlist}
+            onClick={handleClearAll}
             style={{
               background: 'transparent',
               border: '2px solid #ff4444',
@@ -126,7 +139,7 @@ export default function Wishlist() {
           >
             {/* Remove Button */}
             <button
-              onClick={() => removeFromWishlist(item.id)}
+              onClick={() => handleRemove(item)}
               style={{
                 position: 'absolute',
                 top: '0.75rem',

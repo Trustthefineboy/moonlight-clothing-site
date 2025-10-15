@@ -9,26 +9,29 @@ import ProductDetail from './pages/ProductDetail';
 import Wishlist from './pages/Wishlist';
 import Layout from './components/Layout';
 import { WishlistProvider } from './components/WishlistContext';
+import { ToastProvider } from './components/ToastContext';
 import './App.css';
 
 function App() {
   return (
-    <WishlistProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-          </Routes>
-        </Layout>
-      </Router>
-    </WishlistProvider>
+    <ToastProvider>
+      <WishlistProvider>
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </WishlistProvider>
+    </ToastProvider>
   );
 }
 
