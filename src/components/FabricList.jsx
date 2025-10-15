@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import { useWishlist } from './WishlistContext';
 import ProductSkeleton from './ProductSkeleton';
+import QuickViewModal from './QuickViewModal';
 
 export default function FabricList({ filter = {} }) {
   const [fabrics, setFabrics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
@@ -254,61 +256,99 @@ export default function FabricList({ filter = {} }) {
               }}>
                 {fabric.price}
               </div>
-              <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: 'auto' }}>
+                {/* Quick View and Add to Cart */}
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <button
+                    onClick={() => setQuickViewProduct(fabric)}
+                    style={{
+                      flex: 1,
+                      backgroundColor: '#4f8cff',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      padding: '0.75rem',
+                      border: 'none',
+                      borderRadius: 8,
+                      cursor: 'pointer',
+                      transition: 'all 0.3s',
+                      fontSize: '0.95rem'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor = '#3a7bd5';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor = '#4f8cff';
+                    }}
+                  >
+                    👁️ Quick View
+                  </button>
+                  <button
+                    onClick={() => addToCart(fabric)}
+                    style={{
+                      flex: 1,
+                      background: '#FFD700',
+                      color: '#111',
+                      fontWeight: 'bold',
+                      padding: '0.75rem',
+                      border: 'none',
+                      borderRadius: 8,
+                      cursor: 'pointer',
+                      transition: 'all 0.3s',
+                      fontSize: '0.95rem'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = '#222';
+                      e.currentTarget.style.color = '#FFD700';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = '#FFD700';
+                      e.currentTarget.style.color = '#111';
+                    }}
+                  >
+                    🛒 Add
+                  </button>
+                </div>
+                
+                {/* View Full Details Link */}
                 <Link
                   to={`/product/${fabric.id}`}
                   style={{
-                    flex: 1,
                     textDecoration: 'none',
-                    color: '#4f8cff',
+                    color: '#666',
                     fontWeight: 'bold',
                     padding: '0.75rem',
-                    border: '2px solid #4f8cff',
+                    border: '2px solid #ddd',
                     borderRadius: 8,
                     textAlign: 'center',
-                    transition: 'all 0.3s'
+                    transition: 'all 0.3s',
+                    fontSize: '0.9rem'
                   }}
                   onMouseOver={(e) => {
-                    e.currentTarget.style.backgroundColor = '#4f8cff';
-                    e.currentTarget.style.color = '#fff';
+                    e.currentTarget.style.backgroundColor = '#f5f5f5';
+                    e.currentTarget.style.borderColor = '#222';
+                    e.currentTarget.style.color = '#222';
                   }}
                   onMouseOut={(e) => {
                     e.currentTarget.style.backgroundColor = 'transparent';
-                    e.currentTarget.style.color = '#4f8cff';
+                    e.currentTarget.style.borderColor = '#ddd';
+                    e.currentTarget.style.color = '#666';
                   }}
                 >
-                  View Details
+                  Full Details →
                 </Link>
-                <button 
-                  onClick={() => addToCart(fabric)} 
-                  style={{ 
-                    flex: 1,
-                    background: '#FFD700',
-                    color: '#111',
-                    fontWeight: 'bold',
-                    padding: '0.75rem',
-                    border: 'none',
-                    borderRadius: 8,
-                    cursor: 'pointer',
-                    transition: 'all 0.3s',
-                    fontSize: '0.95rem'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = '#222';
-                    e.currentTarget.style.color = '#FFD700';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = '#FFD700';
-                    e.currentTarget.style.color = '#111';
-                  }}
-                >
-                  Add to Cart
-                </button>
               </div>
             </div>
           </div>
         ))}
         </div>
+      )}
+      
+      {/* Quick View Modal */}
+      {quickViewProduct && (
+        <QuickViewModal
+          product={quickViewProduct}
+          onClose={() => setQuickViewProduct(null)}
+        />
       )}
     </div>
   );
