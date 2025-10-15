@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
+import ProductSkeleton from './ProductSkeleton';
 
 export default function FabricList({ filter = {} }) {
   const [fabrics, setFabrics] = useState([]);
@@ -21,7 +22,21 @@ export default function FabricList({ filter = {} }) {
       });
   }, []);
 
-  if (loading) return <div style={{ textAlign: 'center', padding: '2rem' }}><span style={{ display: 'inline-block', width: 40, height: 40, border: '4px solid #FFD700', borderTop: '4px solid #222', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></span><style>{`@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }`}</style><div>Loading fabrics...</div></div>;
+  if (loading) {
+    return (
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+        gap: '2rem',
+        padding: '2rem 0'
+      }}>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+          <ProductSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
+  
   if (error) return <div>{error}</div>;
 
   // Filtering logic

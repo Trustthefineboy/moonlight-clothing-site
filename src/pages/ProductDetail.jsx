@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
+import ImageZoomModal from '../components/ImageZoomModal';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -14,6 +15,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [showZoom, setShowZoom] = useState(false);
 
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const colors = ['Black', 'White', 'Blue', 'Brown', 'Green', 'Yellow', 'Multi-color'];
@@ -105,23 +107,47 @@ export default function ProductDetail() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginBottom: '3rem' }}>
         {/* Product Image */}
         <div>
-          <div style={{
-            width: '100%',
-            height: '600px',
-            backgroundColor: '#f5f5f5',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            border: '1px solid #e0e0e0'
-          }}>
+          <div 
+            style={{
+              width: '100%',
+              height: '600px',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              border: '1px solid #e0e0e0',
+              cursor: 'zoom-in',
+              position: 'relative'
+            }}
+            onClick={() => setShowZoom(true)}
+          >
             <img
               src={product.image}
               alt={product.name}
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover'
+                objectFit: 'cover',
+                transition: 'transform 0.3s ease'
               }}
+              onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
             />
+            {/* Zoom hint */}
+            <div style={{
+              position: 'absolute',
+              bottom: '1rem',
+              right: '1rem',
+              background: 'rgba(0, 0, 0, 0.7)',
+              color: 'white',
+              padding: '0.5rem 1rem',
+              borderRadius: '8px',
+              fontSize: '0.875rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}>
+              🔍 Click to zoom
+            </div>
           </div>
         </div>
 
@@ -432,6 +458,15 @@ export default function ProductDetail() {
             ))}
           </div>
         </div>
+      )}
+      
+      {/* Image Zoom Modal */}
+      {showZoom && (
+        <ImageZoomModal
+          imageUrl={product.image}
+          imageName={product.name}
+          onClose={() => setShowZoom(false)}
+        />
       )}
     </div>
   );
