@@ -13,6 +13,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const colors = ['Black', 'White', 'Blue', 'Brown', 'Green', 'Yellow', 'Multi-color'];
@@ -23,6 +24,22 @@ export default function ProductDetail() {
       .then(data => {
         setProduct(data);
         setLoading(false);
+        
+        // Fetch related products
+        fetch('http://localhost:5000/api/fabrics')
+          .then(res => res.json())
+          .then(allProducts => {
+            // Find products with same category or gender, excluding current product
+            const related = allProducts
+              .filter(p => p.id !== data.id)
+              .filter(p => 
+                (p.categories && data.categories && 
+                 p.categories.some(cat => data.categories.includes(cat))) ||
+                p.gender === data.gender
+              )
+              .slice(0, 4); // Show only 4 related products
+            setRelatedProducts(related);
+          });
       })
       .catch(err => {
         setError('Failed to load product');
@@ -326,6 +343,96 @@ export default function ProductDetail() {
           </Link>
         </div>
       </div>
+
+      {/* Related Products Section */}
+      {relatedProducts.length > 0 && (
+        <div style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '2px solid #f0f0f0' }}>
+          <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem', color: '#222', textAlign: 'center' }}>
+            You May Also Like
+          </h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gap: '2rem'
+          }}>
+            {relatedProducts.map(relatedProduct => (
+              <Link
+                key={relatedProduct.id}
+                to={`/product/${relatedProduct.id}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                <div style={{
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  backgroundColor: '#fff',
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-5px)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                }}>
+                  <div style={{
+                    width: '100%',
+                    height: '280px',
+                    overflow: 'hidden',
+                    backgroundColor: '#f5f5f5'
+                  }}>
+                    <img
+                      src={relatedProduct.image}
+                      alt={relatedProduct.name}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  </div>
+                  <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <h3 style={{
+                      fontSize: '1.1rem',
+                      marginBottom: '0.75rem',
+                      color: '#222',
+                      fontWeight: 'bold'
+                    }}>
+                      {relatedProduct.name}
+                    </h3>
+                    <p style={{
+                      color: '#666',
+                      fontSize: '0.9rem',
+                      marginBottom: '1rem',
+                      flex: 1,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden'
+                    }}>
+                      {relatedProduct.story}
+                    </p>
+                    <div style={{
+                      fontSize: '1.2rem',
+                      fontWeight: 'bold',
+                      color: '#FFD700',
+                      marginTop: 'auto'
+                    }}>
+                      ₦{typeof relatedProduct.price === 'number' ? relatedProduct.price.toLocaleString() : relatedProduct.price}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
