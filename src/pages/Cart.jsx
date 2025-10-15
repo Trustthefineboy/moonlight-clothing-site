@@ -1,16 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
+import { useOrders } from '../components/OrderContext';
+import { useToast } from '../components/ToastContext';
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
+  const { createOrder } = useOrders();
+  const { showToast } = useToast();
+  const navigate = useNavigate();
   
   // Calculate subtotal for an item
   const getItemSubtotal = (item) => {
     return item.price * (item.quantity || 1);
   };
 
-  // Handle WhatsApp checkout
+  // Handle WhatsApp checkout - also creates order
   const handleCheckout = () => {
     const formattedItems = cart.map(item => {
       const quantity = item.quantity || 1;
@@ -26,7 +31,43 @@ export default function Cart() {
       `Hello! I would like to place an order:\n\n${formattedItems}\n\n${total}\n\nPlease let me know how to proceed with payment and delivery.`
     );
 
+    // Create order record
+    const orderData = {
+      items: cart.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: typeof item.price === 'number' ? item.price : 0,
+        quantity: item.quantity || 1,
+        selectedSize: item.selectedSize,
+        selectedColor: item.selectedColor,
+        image: item.image
+      })),
+      subtotal: getCartTotal(),
+      shipping: 0,
+      total: getCartTotal(),
+      customerInfo: {
+        name: 'Customer',
+        email: 'customer@example.com',
+        phone: '',
+        address: 'To be confirmed',
+        city: '',
+        state: '',
+        zipCode: '',
+        country: 'Nigeria'
+      },
+      paymentMethod: 'WhatsApp Order'
+    };
+
+    const newOrder = createOrder(orderData);
+    showToast(`Order ${newOrder.orderNumber} created successfully!`, 'success');
+    clearCart();
+
     window.open(`https://wa.me/2348168279958?text=${message}`, '_blank');
+    
+    // Navigate to orders page after a brief delay
+    setTimeout(() => {
+      navigate('/orders');
+    }, 1500);
   };  return (
     <div style={{ 
       maxWidth: '1200px', 
@@ -252,8 +293,8 @@ export default function Cart() {
             </div>
             
             <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <button 
-                onClick={handleCheckout}
+              <Link
+                to="/checkout"
                 style={{
                   padding: '0.75rem',
                   backgroundColor: '#4f8cff',
@@ -263,7 +304,10 @@ export default function Cart() {
                   cursor: 'pointer',
                   fontSize: '1rem',
                   fontWeight: 'bold',
-                  transition: 'background-color 0.3s'
+                  transition: 'background-color 0.3s',
+                  textDecoration: 'none',
+                  display: 'block',
+                  textAlign: 'center'
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.backgroundColor = '#3a78e0';
@@ -272,7 +316,32 @@ export default function Cart() {
                   e.currentTarget.style.backgroundColor = '#4f8cff';
                 }}
               >
-                Order via WhatsApp
+                Proceed to Checkout
+              </Link>
+              
+              <button 
+                onClick={handleCheckout}
+                style={{
+                  padding: '0.75rem',
+                  backgroundColor: 'transparent',
+                  color: '#25D366',
+                  border: '2px solid #25D366',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  fontWeight: 'bold',
+                  transition: 'all 0.3s'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#25D366';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#25D366';
+                }}
+              >
+                💬 Quick Order via WhatsApp
               </button>
               
               <button 

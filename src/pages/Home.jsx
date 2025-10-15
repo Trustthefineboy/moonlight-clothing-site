@@ -30,24 +30,45 @@ const featuredCollections = [
 const testimonials = [
   {
     id: 1,
-    name: 'Sarah J.',
-    location: 'Lagos',
-    image: 'https://via.placeholder.com/80x80?text=SJ',
-    text: 'The quality of Moonlight Clothings is exceptional. My dashiki has gotten so many compliments!'
+    name: 'Chidinma A.',
+    location: 'Lagos, Nigeria',
+    rating: 5,
+    text: 'The quality of Moonlight Clothings is exceptional! My Covenant Black Kaftan has gotten so many compliments. Will definitely order again!'
   },
   {
     id: 2,
-    name: 'Michael T.',
-    location: 'New York',
-    image: 'https://via.placeholder.com/80x80?text=MT',
-    text: 'I love how these pieces connect me to my heritage while being perfectly modern.'
+    name: 'Emmanuel O.',
+    location: 'Abuja, Nigeria',
+    rating: 5,
+    text: 'Fast delivery and excellent customer service. The Guardian White Kaftan fits perfectly and the fabric quality is top-notch.'
   },
   {
     id: 3,
-    name: 'Amara O.',
-    location: 'London',
-    image: 'https://via.placeholder.com/80x80?text=AO',
-    text: 'The customer service is as beautiful as the clothing. I\'ll be a customer for life!'
+    name: 'Aisha M.',
+    location: 'Port Harcourt, Nigeria',
+    rating: 5,
+    text: 'I love how these pieces connect me to my heritage while being perfectly modern. The designs are unique and stylish!'
+  },
+  {
+    id: 4,
+    name: 'Tunde B.',
+    location: 'Ibadan, Nigeria',
+    rating: 5,
+    text: 'Amazing craftsmanship! The attention to detail on the Senator wear is incredible. Worth every naira!'
+  },
+  {
+    id: 5,
+    name: 'Blessing N.',
+    location: 'Enugu, Nigeria',
+    rating: 4,
+    text: 'Beautiful designs and comfortable fabric. Delivery took a bit longer than expected but the quality made up for it.'
+  },
+  {
+    id: 6,
+    name: 'Oluwaseun K.',
+    location: 'Lagos, Nigeria',
+    rating: 5,
+    text: 'Best online clothing store in Nigeria! Professional service, quality products, and fair prices. Highly recommended!'
   }
 ];
 
@@ -319,33 +340,39 @@ export default function Home() {
             {testimonials.map(testimonial => (
               <div key={testimonial.id} style={{
                 backgroundColor: '#f8f9fa',
-                padding: '1.5rem',
-                borderRadius: '8px',
+                padding: '2rem',
+                borderRadius: '12px',
                 boxShadow: '0 3px 10px rgba(0,0,0,0.05)',
                 position: 'relative',
-                paddingTop: '3rem'
+                transition: 'transform 0.3s, box-shadow 0.3s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 3px 10px rgba(0,0,0,0.05)';
               }}>
-                <div style={{
-                  position: 'absolute',
-                  top: '-25px',
-                  left: '25px',
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  border: '3px solid white',
-                  boxShadow: '0 3px 10px rgba(0,0,0,0.1)'
+                {/* Star Rating */}
+                <div style={{ 
+                  marginBottom: '1rem',
+                  display: 'flex',
+                  gap: '0.25rem',
+                  color: '#FFD700'
                 }}>
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} style={{ fontSize: '1.2rem' }}>
+                      {i < testimonial.rating ? '★' : '☆'}
+                    </span>
+                  ))}
                 </div>
+                
+                {/* Quote Icon */}
                 <div style={{
-                  fontSize: '4rem',
+                  fontSize: '3rem',
                   position: 'absolute',
-                  top: '-5px',
+                  top: '10px',
                   right: '20px',
                   opacity: 0.1,
                   fontFamily: 'serif',
@@ -353,17 +380,50 @@ export default function Home() {
                 }}>
                   "
                 </div>
+                
+                {/* Review Text */}
                 <p style={{ 
                   fontSize: '0.95rem', 
-                  lineHeight: '1.6',
+                  lineHeight: '1.7',
                   marginBottom: '1.5rem',
                   color: '#444',
                   fontStyle: 'italic'
                 }}>
                   "{testimonial.text}"
                 </p>
-                <div style={{ fontWeight: 'bold' }}>{testimonial.name}</div>
-                <div style={{ fontSize: '0.9rem', color: '#666' }}>{testimonial.location}</div>
+                
+                {/* Customer Info */}
+                <div style={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  paddingTop: '1rem',
+                  borderTop: '1px solid #e0e0e0'
+                }}>
+                  <div style={{
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '50%',
+                    backgroundColor: '#4169E1',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.3rem',
+                    fontWeight: 'bold',
+                    flexShrink: 0
+                  }}>
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 'bold', color: '#222', marginBottom: '0.25rem' }}>
+                      {testimonial.name}
+                    </div>
+                    <div style={{ fontSize: '0.85rem', color: '#666' }}>
+                      📍 {testimonial.location}
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
