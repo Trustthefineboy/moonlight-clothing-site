@@ -8,7 +8,6 @@ const navLinks = [
   { to: '/shop', label: 'Shop' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/about', label: 'About' },
-  { to: '/admin', label: 'Admin' },
 ];
 
 export default function Layout({ children }) {
