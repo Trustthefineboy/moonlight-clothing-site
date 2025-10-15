@@ -1,0 +1,331 @@
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../components/CartContext';
+
+export default function ProductDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  const colors = ['Black', 'White', 'Blue', 'Brown', 'Green', 'Yellow', 'Multi-color'];
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/fabrics/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setProduct(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError('Failed to load product');
+        setLoading(false);
+      });
+  }, [id]);
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert('Please select a size');
+      return;
+    }
+    if (!selectedColor) {
+      alert('Please select a color');
+      return;
+    }
+
+    const cartItem = {
+      ...product,
+      cartId: `${product.id}-${selectedSize}-${selectedColor}-${Date.now()}`,
+      selectedSize,
+      selectedColor,
+      quantity
+    };
+
+    addToCart(cartItem);
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
+  };
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '4rem' }}>
+        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⏳</div>
+        <p>Loading product...</p>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div style={{ textAlign: 'center', padding: '4rem' }}>
+        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>❌</div>
+        <h2>Product Not Found</h2>
+        <Link to="/shop" style={{ color: '#4f8cff', textDecoration: 'none', marginTop: '1rem', display: 'inline-block' }}>
+          ← Back to Shop
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+      {/* Breadcrumb */}
+      <div style={{ marginBottom: '2rem', color: '#666', fontSize: '0.9rem' }}>
+        <Link to="/" style={{ color: '#666', textDecoration: 'none' }}>Home</Link>
+        {' > '}
+        <Link to="/shop" style={{ color: '#666', textDecoration: 'none' }}>Shop</Link>
+        {' > '}
+        <span style={{ color: '#222' }}>{product.name}</span>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginBottom: '3rem' }}>
+        {/* Product Image */}
+        <div>
+          <div style={{
+            width: '100%',
+            height: '600px',
+            backgroundColor: '#f5f5f5',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            border: '1px solid #e0e0e0'
+          }}>
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Product Info */}
+        <div>
+          <h1 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#222' }}>
+            {product.name}
+          </h1>
+
+          <div style={{
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            color: '#FFD700',
+            marginBottom: '2rem',
+            padding: '1rem 0',
+            borderTop: '1px solid #eee',
+            borderBottom: '1px solid #eee'
+          }}>
+            ₦{typeof product.price === 'number' ? product.price.toLocaleString() : product.price}
+          </div>
+
+          <div style={{ marginBottom: '2rem' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#444' }}>Description</h3>
+            <p style={{ color: '#666', lineHeight: '1.8' }}>{product.story}</p>
+          </div>
+
+          {/* Gender */}
+          {product.gender && (
+            <div style={{ marginBottom: '1.5rem' }}>
+              <span style={{ fontWeight: 'bold', color: '#444' }}>Gender: </span>
+              <span style={{ color: '#666' }}>{product.gender}</span>
+            </div>
+          )}
+
+          {/* Categories */}
+          {product.categories && product.categories.length > 0 && (
+            <div style={{ marginBottom: '2rem' }}>
+              <span style={{ fontWeight: 'bold', color: '#444', marginRight: '0.5rem' }}>Categories:</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
+                {product.categories.slice(0, 3).map((cat, idx) => (
+                  <span
+                    key={idx}
+                    style={{
+                      padding: '0.25rem 0.75rem',
+                      backgroundColor: '#f0f0f0',
+                      borderRadius: '20px',
+                      fontSize: '0.85rem',
+                      color: '#555'
+                    }}
+                  >
+                    {cat}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Size Selection */}
+          <div style={{ marginBottom: '2rem' }}>
+            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.75rem', color: '#444' }}>
+              Select Size *
+            </label>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {sizes.map(size => (
+                <button
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  style={{
+                    padding: '0.75rem 1.25rem',
+                    border: selectedSize === size ? '2px solid #FFD700' : '1px solid #ddd',
+                    backgroundColor: selectedSize === size ? '#FFF9E6' : '#fff',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: selectedSize === size ? 'bold' : 'normal',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Color Selection */}
+          <div style={{ marginBottom: '2rem' }}>
+            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.75rem', color: '#444' }}>
+              Select Color *
+            </label>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {colors.map(color => (
+                <button
+                  key={color}
+                  onClick={() => setSelectedColor(color)}
+                  style={{
+                    padding: '0.75rem 1.25rem',
+                    border: selectedColor === color ? '2px solid #FFD700' : '1px solid #ddd',
+                    backgroundColor: selectedColor === color ? '#FFF9E6' : '#fff',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: selectedColor === color ? 'bold' : 'normal',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  {color}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Quantity */}
+          <div style={{ marginBottom: '2rem' }}>
+            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.75rem', color: '#444' }}>
+              Quantity
+            </label>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <button
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                disabled={quantity <= 1}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  border: '1px solid #ddd',
+                  backgroundColor: quantity <= 1 ? '#f5f5f5' : '#fff',
+                  borderRadius: '8px',
+                  cursor: quantity <= 1 ? 'not-allowed' : 'pointer',
+                  fontSize: '1.2rem'
+                }}
+              >
+                -
+              </button>
+              <span style={{ fontSize: '1.2rem', fontWeight: 'bold', minWidth: '40px', textAlign: 'center' }}>
+                {quantity}
+              </span>
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  border: '1px solid #ddd',
+                  backgroundColor: '#fff',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '1.2rem'
+                }}
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          {/* Add to Cart Button */}
+          <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+            <button
+              onClick={handleAddToCart}
+              style={{
+                flex: 1,
+                padding: '1rem',
+                backgroundColor: addedToCart ? '#28a745' : '#FFD700',
+                color: addedToCart ? '#fff' : '#111',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.3s'
+              }}
+            >
+              {addedToCart ? '✓ Added to Cart!' : 'Add to Cart'}
+            </button>
+            <button
+              onClick={() => navigate('/cart')}
+              style={{
+                padding: '1rem 1.5rem',
+                backgroundColor: '#fff',
+                color: '#4f8cff',
+                border: '2px solid #4f8cff',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              View Cart
+            </button>
+          </div>
+
+          {/* WhatsApp Order */}
+          <a
+            href={`https://wa.me/${product.whatsapp}?text=${encodeURIComponent(`Hello! I'm interested in ${product.name} (₦${typeof product.price === 'number' ? product.price.toLocaleString() : product.price})`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'block',
+              textAlign: 'center',
+              padding: '1rem',
+              backgroundColor: '#25D366',
+              color: '#fff',
+              textDecoration: 'none',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              marginBottom: '1rem'
+            }}
+          >
+            📱 Order via WhatsApp
+          </a>
+
+          <Link
+            to="/shop"
+            style={{
+              display: 'block',
+              textAlign: 'center',
+              color: '#4f8cff',
+              textDecoration: 'none',
+              padding: '0.5rem'
+            }}
+          >
+            ← Continue Shopping
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -113,8 +113,8 @@ export default function FabricList({ filter = {} }) {
                 {fabric.price}
               </div>
               <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
-                <Link 
-                  to={`/fabric/${fabric.id}`} 
+                <Link
+                  to={`/product/${fabric.id}`}
                   style={{
                     flex: 1,
                     textDecoration: 'none',
