@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useWishlist } from './WishlistContext';
+import { useCart } from './CartContext';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -8,12 +10,13 @@ const navLinks = [
   { to: '/gallery', label: 'Gallery' },
   { to: '/about', label: 'About' },
   { to: '/admin', label: 'Admin' },
-  { to: '/cart', label: 'Cart' },
 ];
 
 export default function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const { wishlistCount } = useWishlist();
+  const { cart } = useCart();
 
   return (
     <div
@@ -62,7 +65,7 @@ export default function Layout({ children }) {
             ☰
           </button>
         ) : (
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             {navLinks.map(link => (
               <Link
                 key={link.to}
@@ -76,6 +79,76 @@ export default function Layout({ children }) {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Wishlist Link with Badge */}
+            <Link
+              to="/wishlist"
+              style={{
+                color: '#1976d2',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem'
+              }}
+            >
+              💝 Wishlist
+              {wishlistCount > 0 && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '-10px',
+                  background: '#ff4444',
+                  color: 'white',
+                  borderRadius: '50%',
+                  width: '20px',
+                  height: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.75rem',
+                  fontWeight: 'bold'
+                }}>
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            
+            {/* Cart Link with Badge */}
+            <Link
+              to="/cart"
+              style={{
+                color: '#1976d2',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem'
+              }}
+            >
+              🛒 Cart
+              {cart.length > 0 && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '-10px',
+                  background: '#FFD700',
+                  color: '#222',
+                  borderRadius: '50%',
+                  width: '20px',
+                  height: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.75rem',
+                  fontWeight: 'bold'
+                }}>
+                  {cart.length}
+                </span>
+              )}
+            </Link>
           </div>
         )}
       </nav>

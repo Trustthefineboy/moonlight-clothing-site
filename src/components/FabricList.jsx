@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
+import { useWishlist } from './WishlistContext';
 import ProductSkeleton from './ProductSkeleton';
 
 export default function FabricList({ filter = {} }) {
@@ -8,6 +9,7 @@ export default function FabricList({ filter = {} }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   useEffect(() => {
     fetch('http://localhost:5000/api/fabrics')
@@ -76,9 +78,9 @@ export default function FabricList({ filter = {} }) {
         gap: '2rem'
       }}>
         {filtered.map(fabric => (
-          <div 
-            key={fabric.id} 
-            style={{ 
+          <div
+            key={fabric.id}
+            style={{
               border: '1px solid #e0e0e0',
               borderRadius: 12,
               overflow: 'hidden',
@@ -87,7 +89,8 @@ export default function FabricList({ filter = {} }) {
               transition: 'transform 0.3s, box-shadow 0.3s',
               display: 'flex',
               flexDirection: 'column',
-              height: '100%'
+              height: '100%',
+              position: 'relative'
             }}
             onMouseOver={(e) => {
               e.currentTarget.style.transform = 'translateY(-5px)';
@@ -98,20 +101,60 @@ export default function FabricList({ filter = {} }) {
               e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
             }}
           >
-            <div style={{ 
-              width: '100%', 
-              height: 280, 
+            {/* Wishlist Heart Button */}
+            <button
+              onClick={() => {
+                if (isInWishlist(fabric.id)) {
+                  removeFromWishlist(fabric.id);
+                } else {
+                  addToWishlist(fabric);
+                }
+              }}
+              style={{
+                position: 'absolute',
+                top: '0.75rem',
+                right: '0.75rem',
+                background: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '2.5rem',
+                height: '2.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontSize: '1.5rem',
+                zIndex: 2,
+                transition: 'all 0.3s',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'scale(1.1)';
+                e.target.style.background = isInWishlist(fabric.id) ? '#ff4444' : '#fff';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'scale(1)';
+                e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+              }}
+              title={isInWishlist(fabric.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              {isInWishlist(fabric.id) ? '❤️' : '🤍'}
+            </button>
+            
+            <div style={{
+              width: '100%',
+              height: 280,
               overflow: 'hidden',
               backgroundColor: '#f5f5f5'
             }}>
-              <img 
-                src={fabric.image} 
-                alt={fabric.name} 
-                style={{ 
-                  width: '100%', 
+              <img
+                src={fabric.image}
+                alt={fabric.name}
+                style={{
+                  width: '100%',
                   height: '100%',
                   objectFit: 'cover'
-                }} 
+                }}
               />
             </div>
             <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>

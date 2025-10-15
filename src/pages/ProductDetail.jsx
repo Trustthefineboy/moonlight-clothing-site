@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
+import { useWishlist } from '../components/WishlistContext';
 import ImageZoomModal from '../components/ImageZoomModal';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -298,12 +300,12 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          {/* Add to Cart Button */}
+          {/* Add to Cart and Wishlist Buttons */}
           <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
             <button
               onClick={handleAddToCart}
               style={{
-                flex: 1,
+                flex: 2,
                 padding: '1rem',
                 backgroundColor: addedToCart ? '#28a745' : '#FFD700',
                 color: addedToCart ? '#fff' : '#111',
@@ -317,6 +319,48 @@ export default function ProductDetail() {
             >
               {addedToCart ? '✓ Added to Cart!' : 'Add to Cart'}
             </button>
+            
+            <button
+              onClick={() => {
+                if (isInWishlist(product.id)) {
+                  removeFromWishlist(product.id);
+                } else {
+                  addToWishlist(product);
+                }
+              }}
+              style={{
+                flex: 1,
+                padding: '1rem',
+                backgroundColor: isInWishlist(product.id) ? '#ff4444' : 'transparent',
+                color: isInWishlist(product.id) ? '#fff' : '#ff4444',
+                border: '2px solid #ff4444',
+                borderRadius: '8px',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem'
+              }}
+              onMouseEnter={(e) => {
+                if (!isInWishlist(product.id)) {
+                  e.target.style.backgroundColor = '#ff4444';
+                  e.target.style.color = '#fff';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isInWishlist(product.id)) {
+                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.color = '#ff4444';
+                }
+              }}
+              title={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              {isInWishlist(product.id) ? '❤️ In Wishlist' : '🤍 Wishlist'}
+            </button>
+            
             <button
               onClick={() => navigate('/cart')}
               style={{
