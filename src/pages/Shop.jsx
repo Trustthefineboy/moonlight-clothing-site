@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FabricList from '../components/FabricList';
+import SearchBar from '../components/SearchBar';
 
 const categories = [
   'The Sacred Fabrics',
@@ -21,10 +22,17 @@ export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedType, setSelectedType] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   return (
     <div>
       <h1>Shop</h1>
+      
+      <SearchBar onSearch={handleSearch} />
       <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
         <style>{`
           select.shop-select {
@@ -62,7 +70,7 @@ export default function Shop() {
           ))}
         </select>
       </div>
-      <FabricList filter={{ category: selectedCategory, gender: selectedGender, type: selectedType }} />
+      <FabricList filter={{ category: selectedCategory, gender: selectedGender, type: selectedType, search: searchQuery }} />
     </div>
   );
 }

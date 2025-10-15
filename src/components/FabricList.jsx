@@ -26,6 +26,17 @@ export default function FabricList({ filter = {} }) {
 
   // Filtering logic
   let filtered = fabrics;
+  
+  // Search filter
+  if (filter.search) {
+    const searchLower = filter.search.toLowerCase();
+    filtered = filtered.filter(f => 
+      f.name.toLowerCase().includes(searchLower) ||
+      (f.story && f.story.toLowerCase().includes(searchLower)) ||
+      (f.categories && f.categories.some(cat => cat.toLowerCase().includes(searchLower)))
+    );
+  }
+  
   if (filter.category) {
     filtered = filtered.filter(f => f.categories && f.categories.includes(filter.category));
   }
@@ -38,7 +49,12 @@ export default function FabricList({ filter = {} }) {
 
   return (
     <div>
-      <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: '#222' }}>Available Products</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <h2 style={{ fontSize: '2rem', margin: 0, color: '#222' }}>Available Products</h2>
+        <div style={{ fontSize: '1rem', color: '#666', fontWeight: 'normal' }}>
+          {filtered.length} {filtered.length === 1 ? 'product' : 'products'} found
+        </div>
+      </div>
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
