@@ -16,19 +16,18 @@ export default function Cart() {
       const quantity = item.quantity || 1;
       const size = item.selectedSize || 'Not specified';
       const color = item.selectedColor || 'Not specified';
-      return `${item.name} (Qty: ${quantity}, Size: ${size}, Color: ${color}) - $${(item.price * quantity).toFixed(2)}`;
+      const price = typeof item.price === 'number' ? item.price : 0;
+      return `${item.name} (Qty: ${quantity}, Size: ${size}, Color: ${color}) - ₦${(price * quantity).toLocaleString()}`;
     }).join('\n');
-    
-    const total = `Total: $${getCartTotal().toFixed(2)}`;
-    
+
+    const total = `Total: ₦${getCartTotal().toLocaleString()}`;
+
     const message = encodeURIComponent(
       `Hello! I would like to place an order:\n\n${formattedItems}\n\n${total}\n\nPlease let me know how to proceed with payment and delivery.`
     );
-    
-    window.open(`https://wa.me/2348168279958?text=${message}`, '_blank');
-  };
 
-  return (
+    window.open(`https://wa.me/2348168279958?text=${message}`, '_blank');
+  };  return (
     <div style={{ 
       maxWidth: '1200px', 
       margin: '0 auto', 
@@ -140,7 +139,7 @@ export default function Cart() {
 
               {/* Price */}
               <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
-                ${item.price.toFixed(2)}
+                ₦{typeof item.price === 'number' ? item.price.toLocaleString() : '0'}
               </div>
 
               {/* Quantity */}
@@ -202,7 +201,7 @@ export default function Cart() {
 
               {/* Subtotal */}
               <div style={{ textAlign: 'right', fontWeight: 'bold', color: '#4f8cff' }}>
-                ${getItemSubtotal(item).toFixed(2)}
+                ₦{getItemSubtotal(item).toLocaleString()}
               </div>
             </div>
           ))}
@@ -226,7 +225,7 @@ export default function Cart() {
               marginBottom: '0.5rem'
             }}>
               <span>Items ({cart.length}):</span>
-              <span>${getCartTotal().toFixed(2)}</span>
+              <span>₦{getCartTotal().toLocaleString()}</span>
             </div>
             
             <div style={{
@@ -249,7 +248,7 @@ export default function Cart() {
               fontSize: '1.1rem'
             }}>
               <span>Total:</span>
-              <span>${getCartTotal().toFixed(2)}</span>
+              <span>₦{getCartTotal().toLocaleString()}</span>
             </div>
             
             <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
