@@ -1,0 +1,71 @@
+{
+  "folders": [
+    {
+      "name": "Moonlight Clothing Site",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+      "**/*.jpg": true,
+      "**/*.jpeg": true,
+      "**/*.png": true,
+      "**/*.gif": true,
+      "**/*.bmp": true,
+      "**/*.svg": true,
+      "**/*.webp": true,
+      "**/*.ico": true,
+      "**/*.tiff": true,
+      "**/*.tif": true,
+      "**/public/images/**": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/*.jpg": true,
+      "**/*.jpeg": true,
+      "**/*.png": true,
+      "**/*.gif": true,
+      "**/*.bmp": true,
+      "**/*.svg": true,
+      "**/*.webp": true,
+      "**/*.ico": true,
+      "**/*.tiff": true,
+      "**/*.tif": true,
+      "**/public/images": true
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/node_modules": true
+    },
+    "typescript.preferences.includePackageJsonAutoImports": "off",
+    "javascript.preferences.includePackageJsonAutoImports": "off",
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "git.scanRepositories": [],
+    "git.autoRepositoryDetection": false,
+    "files.associations": {
+      "*.jpg": "plaintext",
+      "*.jpeg": "plaintext", 
+      "*.png": "plaintext",
+      "*.gif": "plaintext",
+      "*.bmp": "plaintext",
+      "*.webp": "plaintext"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss"
+    ]
+  }
+}

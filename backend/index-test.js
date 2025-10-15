@@ -1,0 +1,81 @@
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// In-memory store for demo
+let fabrics = [
+  {
+    id: 1,
+    name: 'Adinkra White Shirt',
+    story: `🌕 OSUPA ALÉ — THE MOON OF AWAKENING\n\nWe don’t just make clothes — we translate messages from the moon.\nOsupa Alé is more than a brand; it is a divine encounter where fabric meets spirit, culture meets design, and light takes form. Born from the Moonlight Clothings movement, Osupa Alé stands as a revelation — a rebirth of African luxury, purity, and purpose.\n\nEvery fabric carries a voice.\nEvery pattern holds a prayer.\nEvery design tells the story of generations — past, present, and eternal.\n\nHere, we weave language, memory, and divine inspiration into textile art. Our creations are not just worn — they are experienced, felt, and remembered. Each piece carries the seal of authenticity, with a scan code that opens the story behind its creation — a journey of craftsmanship, spirituality, and vision.\n\nOsupa Alé is where African roots meet modern revelation.\nWhere style becomes substance.\nWhere culture becomes light.\n\nWe are building what will last.\nBrick by brick. Stitch by stitch. Light by light.\n\nWelcome to Osupa Alé — The Night of Purpose, The Fabric of Legacy.`,
+    image: '/images/adinkra-white-shirt.jpg',
+    products: [
+      'Shirts',
+      'Two pieces (Short and trouser)',
+      'Kaftan',
+      'Palazzo casual trousers'
+    ],
+    whatsapp: '+2348168279958',
+    categories: [
+      'The Sacred Fabrics',
+      'The Ready-to-Wear Realm',
+      'Men’s Collection',
+      'Women’s Collection',
+      'Unisex Divine Fits',
+      'Limited Drop Series',
+      'The Archive Pieces',
+      'The Capsule Editions',
+      'Custom & Made-to-Order',
+      'The Scroll of Stories',
+      'Fabric Story Portal',
+      'Moonlight Journal Entries',
+      'Behind the Design Videos',
+      'Accessories of Light',
+      'Caps & Bandanas',
+      'Bags & Pouches',
+      'Jewelry & Bracelets'
+    ]
+  },
+];
+
+// Get all fabrics
+app.get('/api/fabrics', (req, res) => {
+  res.json(fabrics);
+});
+// Get single fabric
+app.get('/api/fabrics/:id', (req, res) => {
+  const fabric = fabrics.find(f => f.id === parseInt(req.params.id));
+  if (fabric) res.json(fabric);
+  else res.status(404).json({ error: 'Not found' });
+});
+
+app.post('/api/fabrics', (req, res) => {
+  const { name, story, image, products, category } = req.body;
+  const id = fabrics.length + 1;
+  const newFabric = { id, name, story, image, products, category };
+  fabrics.push(newFabric);
+  res.status(201).json(newFabric);
+});
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+// QR code generation endpoint (returns a placeholder for now)
+app.get('/api/fabrics/:id/qrcode', (req, res) => {
+  // In a real app, generate a QR code image for the fabric page URL
+  const fabricId = req.params.id;
+  const url = `https://moonlightclothings.com/fabric/${fabricId}`;
+  // Placeholder: return the URL that would be encoded
+  res.json({ qrUrl: url });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Moonlight backend running on port ${PORT}`);
+});
+
