@@ -9,6 +9,7 @@ const navLinks = [
   { to: '/shop', label: 'Shop' },
   { to: '/nft-gallery', label: '✨ NFT Vault' },
   { to: '/gallery', label: 'Gallery' },
+  { to: '/memories', label: '📸 Memories' },
   { to: '/reviews', label: 'Reviews' },
   { to: '/about', label: 'About' },
 ];

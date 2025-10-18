@@ -17,6 +17,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import Fabric from './pages/Fabric';
 import Admin from './pages/Admin';
+import Memories from './pages/Memories';
 import Layout from './components/Layout';
 import { WishlistProvider } from './components/WishlistContext';
 import { ToastProvider } from './components/ToastContext';
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/gallery" element={<Gallery />} />
+                  <Route path="/memories" element={<Memories />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/checkout" element={<Checkout />} />
