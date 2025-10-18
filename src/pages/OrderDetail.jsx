@@ -454,6 +454,7 @@ export default function OrderDetail() {
         )}
 
         <button
+          onClick={() => window.open('https://wa.me/2348168279958?text=Hello, I need support with my order ' + order.orderNumber, '_blank')}
           style={{
             flex: 1,
             minWidth: '200px',

@@ -1,6 +1,6 @@
-# Moonlight Clothings Website - Project Summary
+\
 
-## 📋 What We've Built So Far
+
 
 ### ✅ **1. Complete E-Commerce Website Structure**
 
@@ -135,7 +135,7 @@ All products include:
 
 ---
 
-## 🚀 **How to Run the Website**
+
 
 ### **Start Backend Server:**
 ```powershell
@@ -298,4 +298,4 @@ You have a **fully functional e-commerce clothing website** with:
 - Adding payment gateway
 - Growing the business
 
-Your website is production-ready for soft launch! 🚀
+
