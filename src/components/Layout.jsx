@@ -7,6 +7,7 @@ import ScrollToTop from './ScrollToTop';
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/shop', label: 'Shop' },
+  { to: '/nft-gallery', label: '✨ NFT Vault' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/reviews', label: 'Reviews' },
   { to: '/about', label: 'About' },
@@ -88,6 +89,24 @@ export default function Layout({ children }) {
                 onMouseLeave={(e) => e.target.style.color = '#1976d2'}
               >
                 📦 Orders
+              </Link>
+              
+              {/* Profile Link */}
+              <Link
+                to="/profile"
+                style={{
+                  color: '#1976d2',
+                  textDecoration: 'none',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  transition: 'color 0.3s'
+                }}
+                onMouseEnter={(e) => e.target.style.color = '#4169E1'}
+                onMouseLeave={(e) => e.target.style.color = '#1976d2'}
+              >
+                👤 Account
               </Link>
             </div>
           )}
@@ -227,6 +246,20 @@ export default function Layout({ children }) {
               }}
             >
               📦 Orders
+            </Link>
+            <Link
+              to="/profile"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                display: 'block',
+                padding: '1rem',
+                color: '#1976d2',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                borderBottom: '1px solid #f0f0f0'
+              }}
+            >
+              👤 Account
             </Link>
           </div>
         )}
