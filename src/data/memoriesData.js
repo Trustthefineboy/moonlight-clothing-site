@@ -2,112 +2,136 @@
 // Add your photos and videos here
 
 export const memoriesData = [
+  // ADD YOUR MEMORIES BELOW THIS LINE
   {
     id: 1,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 080946.png',
-    title: 'Moonlight Collection Launch',
+    type: 'video',
+    src: '/videos/vid1.mp4',
+    title: 'Moonlight Video 1',
     date: 'October 2025',
-    description: 'The day we launched our sacred fabrics collection'
+    description: 'Behind the scenes at Moonlight Clothings'
   },
   {
     id: 2,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081007.png',
-    title: 'Behind The Scenes',
+    type: 'video',
+    src: '/videos/vid2.mp4',
+    title: 'Moonlight Video 2',
     date: 'October 2025',
-    description: 'Creating magic in the studio'
+    description: 'Moonlight moments and memories'
   },
   {
     id: 3,
     type: 'image',
-    src: '/images/Screenshot 2025-10-16 081215.png',
-    title: 'Yoruba Kingdom Collection',
-    date: 'October 2025',
-    description: 'Ancient wisdom meets modern fashion'
-  },
-  {
-    id: 4,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081234.png',
-    title: 'Cowrie Shell Elegance',
-    date: 'October 2025',
-    description: 'Sacred currency and divine protection'
-  },
-  {
-    id: 5,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081302.png',
-    title: 'King Menes Collection',
-    date: 'October 2025',
-    description: 'The first Pharaoh collection photoshoot'
-  },
-  {
-    id: 6,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081321.png',
-    title: 'Mansa Musa Golden Age',
-    date: 'October 2025',
-    description: 'Celebrating wealth and wisdom'
-  },
-  {
-    id: 7,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081339.png',
-    title: 'Adire Sacred Geometry',
-    date: 'October 2025',
-    description: 'Traditional tie-dye techniques preserved'
-  },
-  {
-    id: 8,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081356.png',
-    title: 'Kente Cloth Heritage',
-    date: 'October 2025',
-    description: 'Weaving stories into fabric'
-  },
-  {
-    id: 9,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081413.png',
-    title: 'Queen Nzinga Collection',
-    date: 'October 2025',
-    description: 'Warrior queen designs'
-  },
-  {
-    id: 10,
-    type: 'image',
-    src: '/images/Screenshot 2025-10-16 081430.png',
-    title: 'Studio Session',
+    src: '/images/image1.jpg',
+    title: 'Moonlight Image 1',
     date: 'October 2025',
     description: 'Capturing the essence of Moonlight'
   },
   {
+    id: 4,
+    type: 'image',
+    src: '/images/image2.jpg',
+    title: 'Moonlight Image 2',
+    date: 'October 2025',
+    description: 'Sacred fabrics collection'
+  },
+  {
+    id: 5,
+    type: 'image',
+    src: '/images/image3.jpg',
+    title: 'Moonlight Image 3',
+    date: 'October 2025',
+    description: 'Heritage meets modern fashion'
+  },
+  {
+    id: 6,
+    type: 'image',
+    src: '/images/image4.jpg',
+    title: 'Moonlight Image 4',
+    date: 'October 2025',
+    description: 'The journey continues'
+  },
+  {
+    id: 7,
+    type: 'image',
+    src: '/images/images5.jpg',
+    title: 'Moonlight Image 5',
+    date: 'October 2025',
+    description: 'Moonlight memories'
+  },
+  {
+    id: 8,
+    type: 'image',
+    src: '/images/images6.jpg',
+    title: 'Moonlight Image 6',
+    date: 'October 2025',
+    description: 'Behind the fabrics'
+  },
+  {
+    id: 9,
+    type: 'image',
+    src: '/images/images7.jpg',
+    title: 'Moonlight Image 7',
+    date: 'October 2025',
+    description: 'Sacred moments'
+  },
+  {
+    id: 10,
+    type: 'image',
+    src: '/images/images8.jpg',
+    title: 'Moonlight Image 8',
+    date: 'October 2025',
+    description: 'Collection highlights'
+  },
+  {
     id: 11,
     type: 'image',
-    src: '/images/Screenshot 2025-10-16 081513.png',
-    title: 'African Heritage Showcase',
+    src: '/images/images9.jpg',
+    title: 'Moonlight Image 9',
     date: 'October 2025',
-    description: 'Celebrating our roots'
+    description: 'Fashion showcase'
   },
   {
     id: 12,
     type: 'image',
-    src: '/images/Screenshot 2025-10-16 081531.png',
-    title: 'Textile Craftsmanship',
+    src: '/images/images10.jpg',
+    title: 'Moonlight Image 10',
     date: 'October 2025',
-    description: 'Every stitch tells a story'
+    description: 'Design inspiration'
   },
   {
     id: 13,
     type: 'image',
-    src: '/images/Screenshot 2025-10-16 081602.png',
-    title: 'Final Moments',
+    src: '/images/images11.jpg',
+    title: 'Moonlight Image 11',
     date: 'October 2025',
-    description: 'The journey continues'
+    description: 'Creative process'
   },
-
-  // ADD YOUR NEW MEMORIES BELOW THIS LINE
+  {
+    id: 14,
+    type: 'image',
+    src: '/images/images12.jpg',
+    title: 'Moonlight Image 12',
+    date: 'October 2025',
+    description: 'Final touches'
+  },
+  {
+    id: 16,
+    type: 'image',
+    src: '/images/images13.jpg',
+    title: 'Moonlight Image 13',
+    date: 'October 2025',
+    description: 'More memories'
+  },
+  {
+    id: 15,
+    type: 'video',
+    src: '/videos/vid3.mp4',
+    title: 'Moonlight Video 3',
+    date: 'October 2025',
+    description: 'More behind the scenes'
+  },
+  
   // Example for adding more images:
   // {
   //   id: 14,

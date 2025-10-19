@@ -244,7 +244,8 @@ export default function QuickViewModal({ product, onClose }) {
                     borderRadius: '6px',
                     cursor: 'pointer',
                     fontSize: '1.1rem',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    color: '#222'
                   }}
                 >
                   -
@@ -262,7 +263,8 @@ export default function QuickViewModal({ product, onClose }) {
                     borderRadius: '6px',
                     cursor: 'pointer',
                     fontSize: '1.1rem',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    color: '#222'
                   }}
                 >
                   +

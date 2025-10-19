@@ -32,7 +32,7 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [createdOrderNumber, setCreatedOrderNumber] = useState('');
 
-  const shippingFee = 2000; // â‚¦2,000 flat shipping
+  const shippingFee = 2000; // 2,000 flat shipping
   const total = getCartTotal() + shippingFee;
 
   // Bank details for payment
@@ -172,7 +172,7 @@ export default function Checkout() {
         padding: '4rem 2rem',
         textAlign: 'center'
       }}>
-        <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>ðŸ›’</div>
+        <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>🛒</div>
         <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#222' }}>
           Your cart is empty
         </h2>
@@ -237,7 +237,7 @@ export default function Checkout() {
             justifyContent: 'center',
             fontWeight: 'bold'
           }}>
-            {step > 1 ? 'âœ“' : '1'}
+            {step > 1 ? '✓' : '1'}
           </div>
           <span style={{ fontWeight: step === 1 ? 'bold' : 'normal', color: '#666' }}>
             Shipping Info
@@ -262,7 +262,7 @@ export default function Checkout() {
             justifyContent: 'center',
             fontWeight: 'bold'
           }}>
-            {step > 2 ? 'âœ“' : '2'}
+            {step > 2 ? '✓' : '2'}
           </div>
           <span style={{ fontWeight: step === 2 ? 'bold' : 'normal', color: '#666' }}>
             Payment
@@ -287,7 +287,7 @@ export default function Checkout() {
             justifyContent: 'center',
             fontWeight: 'bold'
           }}>
-            {step === 3 ? 'âœ“' : '3'}
+            {step === 3 ? '✓' : '3'}
           </div>
           <span style={{ fontWeight: step === 3 ? 'bold' : 'normal', color: '#666' }}>
             Complete
@@ -309,7 +309,7 @@ export default function Checkout() {
             padding: '2rem'
           }}>
             <h2 style={{ margin: 0, marginBottom: '1.5rem', fontSize: '1.5rem', color: '#222' }}>
-              ðŸ“ Shipping Information
+              📦 Shipping Information
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -497,7 +497,7 @@ export default function Checkout() {
               onMouseEnter={(e) => e.target.style.backgroundColor = '#3a5bc7'}
               onMouseLeave={(e) => e.target.style.backgroundColor = '#4169E1'}
             >
-              Continue to Payment â†’
+              Continue to Payment →
             </button>
           </div>
 
@@ -536,7 +536,7 @@ export default function Checkout() {
                       Qty: {item.quantity || 1}
                     </div>
                     <div style={{ fontSize: '0.9rem', color: '#FFD700', fontWeight: 'bold' }}>
-                      â‚¦{(item.price * (item.quantity || 1)).toLocaleString()}
+                      ₦{(item.price * (item.quantity || 1)).toLocaleString()}
                     </div>
                   </div>
                 </div>
@@ -546,11 +546,11 @@ export default function Checkout() {
             <div style={{ borderTop: '2px solid #e0e0e0', paddingTop: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', color: '#666' }}>
                 <span>Subtotal:</span>
-                <span>â‚¦{getCartTotal().toLocaleString()}</span>
+                <span>₦{getCartTotal().toLocaleString()}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', color: '#666' }}>
                 <span>Delivery Fee:</span>
-                <span>â‚¦{shippingFee.toLocaleString()}</span>
+                <span>₦{shippingFee.toLocaleString()}</span>
               </div>
               <div style={{
                 display: 'flex',
@@ -562,7 +562,7 @@ export default function Checkout() {
                 color: '#222'
               }}>
                 <span>Total:</span>
-                <span style={{ color: '#FFD700' }}>â‚¦{total.toLocaleString()}</span>
+                <span style={{ color: '#FFD700' }}>₦{total.toLocaleString()}</span>
               </div>
             </div>
           </div>
@@ -583,7 +583,7 @@ export default function Checkout() {
             padding: '2rem'
           }}>
             <h2 style={{ margin: 0, marginBottom: '1.5rem', fontSize: '1.5rem', color: '#222' }}>
-              ðŸ’³ Payment Method
+              💳 Payment Method
             </h2>
 
             {/* Payment Method Selection */}
@@ -616,7 +616,7 @@ export default function Checkout() {
                   </div>
                   <div>
                     <div style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.25rem' }}>
-                      ðŸ¦ Bank Transfer
+                      🏦 Bank Transfer
                     </div>
                     <div style={{ fontSize: '0.9rem', color: '#666' }}>
                       Pay directly to our bank account (All Nigerian Banks supported)
@@ -635,7 +635,7 @@ export default function Checkout() {
               marginBottom: '2rem'
             }}>
               <h3 style={{ margin: 0, marginBottom: '1.5rem', fontSize: '1.2rem', color: '#222' }}>
-                ðŸ“‹ Bank Account Details
+                📋 Bank Account Details
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -667,7 +667,7 @@ export default function Checkout() {
                         fontSize: '0.85rem'
                       }}
                     >
-                      ðŸ“‹ Copy
+                      📋 Copy
                     </button>
                   </div>
                 </div>
@@ -700,7 +700,7 @@ export default function Checkout() {
                         fontSize: '0.85rem'
                       }}
                     >
-                      ðŸ“‹ Copy
+                      📋 Copy
                     </button>
                   </div>
                 </div>
@@ -733,7 +733,7 @@ export default function Checkout() {
                         fontSize: '0.85rem'
                       }}
                     >
-                      ðŸ“‹ Copy
+                      📋 Copy
                     </button>
                   </div>
                 </div>
@@ -751,7 +751,7 @@ export default function Checkout() {
                     textAlign: 'center',
                     color: '#222'
                   }}>
-                    â‚¦{total.toLocaleString()}
+                    ₦{total.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -765,7 +765,7 @@ export default function Checkout() {
                 fontSize: '0.9rem',
                 color: '#856404'
               }}>
-                âš ï¸ <strong>Important:</strong> After making payment, please upload your payment receipt/proof below to complete your order.
+                ⚠️ <strong>Important:</strong> After making payment, please upload your payment receipt/proof below to complete your order.
               </div>
             </div>
 
@@ -779,7 +779,7 @@ export default function Checkout() {
               textAlign: 'center'
             }}>
               <h3 style={{ margin: 0, marginBottom: '1rem', fontSize: '1.2rem', color: '#222' }}>
-                ðŸ“¸ Upload Payment Proof
+                📸 Upload Payment Proof
               </h3>
               <p style={{ color: '#666', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
                 Upload a screenshot or photo of your payment confirmation
@@ -836,7 +836,7 @@ export default function Checkout() {
                     fontWeight: 'bold'
                   }}
                 >
-                  ðŸ“¤ Choose File
+                  📤 Choose File
                 </label>
               )}
             </div>
@@ -856,7 +856,7 @@ export default function Checkout() {
                   cursor: 'pointer'
                 }}
               >
-                â† Back
+                 Back
               </button>
 
               <button
@@ -876,7 +876,7 @@ export default function Checkout() {
                 }}
                 disabled={!paymentProof || isProcessing}
               >
-                {isProcessing ? 'â³ Processing...' : 'Complete Order âœ“'}
+                {isProcessing ? ' Processing...' : 'Complete Order '}
               </button>
             </div>
           </div>
@@ -903,18 +903,18 @@ export default function Checkout() {
                 <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>{formData.name}</div>
                 <div>{formData.address}</div>
                 <div>{formData.city}, {formData.state}</div>
-                <div style={{ marginTop: '0.5rem' }}>ðŸ“ž {formData.phone}</div>
+                <div style={{ marginTop: '0.5rem' }}>📞 {formData.phone}</div>
               </div>
             </div>
 
             <div style={{ borderTop: '2px solid #e0e0e0', paddingTop: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', color: '#666' }}>
                 <span>Items ({cart.length}):</span>
-                <span>â‚¦{getCartTotal().toLocaleString()}</span>
+                <span>₦{getCartTotal().toLocaleString()}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', color: '#666' }}>
                 <span>Delivery Fee:</span>
-                <span>â‚¦{shippingFee.toLocaleString()}</span>
+                <span>₦{shippingFee.toLocaleString()}</span>
               </div>
               <div style={{
                 display: 'flex',
@@ -926,7 +926,7 @@ export default function Checkout() {
                 color: '#222'
               }}>
                 <span>Total:</span>
-                <span style={{ color: '#FFD700' }}>â‚¦{total.toLocaleString()}</span>
+                <span style={{ color: '#FFD700' }}>₦{total.toLocaleString()}</span>
               </div>
             </div>
           </div>
@@ -944,7 +944,7 @@ export default function Checkout() {
           padding: '3rem',
           textAlign: 'center'
         }}>
-          <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>âœ…</div>
+          <div style={{ fontSize: '5rem', marginBottom: '1rem' }}></div>
           <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#32CD32' }}>
             Order Placed Successfully!
           </h2>
@@ -977,7 +977,7 @@ export default function Checkout() {
             color: '#856404',
             textAlign: 'left'
           }}>
-            <strong>ðŸ“§ Next Steps:</strong>
+            <strong>📧 Next Steps:</strong>
             <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem' }}>
               <li>We'll verify your payment within 24 hours</li>
               <li>You'll receive email confirmation once verified</li>

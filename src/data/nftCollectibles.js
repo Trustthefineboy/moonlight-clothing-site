@@ -14,7 +14,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081215.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081215.png',
-    price: 0.8,
+    price: 1600000,
     status: 'available',
     attributes: {
       era: 'Ancient Yoruba Kingdom',
@@ -36,7 +36,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081234.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081234.png',
-    price: 0.55,
+    price: 1100000,
     status: 'available',
     attributes: {
       era: 'Ancient to Modern',
@@ -58,7 +58,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081302.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081302.png',
-    price: 1.5,
+    price: 3000000,
     status: 'available',
     attributes: {
       era: '3100 BCE',
@@ -80,7 +80,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081321.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081321.png',
-    price: 2.0,
+    price: 4000000,
     status: 'available',
     attributes: {
       era: '1312-1337 CE',
@@ -102,7 +102,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081340.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081340.png',
-    price: 0.65,
+    price: 1300000,
     status: 'available',
     attributes: {
       era: 'Traditional to Contemporary',
@@ -124,7 +124,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 080946.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 080946.png',
-    price: 0.75,
+    price: 1500000,
     status: 'available',
     attributes: {
       era: 'Contemporary Heritage',
@@ -146,7 +146,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081133.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081133.png',
-    price: 0.5,
+    price: 1000000,
     status: 'available',
     attributes: {
       era: 'Timeless',
@@ -168,7 +168,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081153.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081153.png',
-    price: 0.45,
+    price: 900000,
     status: 'available',
     attributes: {
       era: 'Eternal Nature',
@@ -190,7 +190,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081541.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081541.png',
-    price: 0.4,
+    price: 800000,
     status: 'available',
     attributes: {
       era: 'Timeless',
@@ -212,7 +212,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081602.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081602.png',
-    price: 0.9,
+    price: 1800000,
     status: 'available',
     attributes: {
       era: 'Ancient to Eternal',
@@ -234,7 +234,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081404.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081404.png',
-    price: 0.85,
+    price: 1700000,
     status: 'available',
     attributes: {
       era: 'Ancestral Timeless',
@@ -256,7 +256,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081429.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081429.png',
-    price: 0.6,
+    price: 1200000,
     status: 'available',
     attributes: {
       era: 'Transcendent',
@@ -278,7 +278,7 @@ export const nftCollectibles = [
     blockchain: 'Ethereum',
     imageUrl: '/images/Screenshot 2025-10-16 081516.png',
     thumbnailUrl: '/images/Screenshot 2025-10-16 081516.png',
-    price: 0.95,
+    price: 1900000,
     status: 'available',
     attributes: {
       era: 'Ancient Covenant',

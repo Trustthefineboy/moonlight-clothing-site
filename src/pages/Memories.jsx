@@ -3,7 +3,7 @@ import { memoriesData } from '../data/memoriesData';
 
 export default function Memories() {
   const [selectedMedia, setSelectedMedia] = useState(null);
-  const [filter, setFilter] = useState('all'); // all, images, videos
+  const [filter, setFilter] = useState('all'); // all, image, video
 
   // Use memories from data file
   const memories = memoriesData;
@@ -70,7 +70,7 @@ export default function Memories() {
           marginBottom: '3rem',
           flexWrap: 'wrap'
         }}>
-          {['all', 'images', 'videos'].map(type => (
+          {['all', 'image', 'video'].map(type => (
             <button
               key={type}
               onClick={() => setFilter(type)}
@@ -103,7 +103,7 @@ export default function Memories() {
                 }
               }}
             >
-              {type === 'all' ? '✨ All' : type === 'images' ? '📷 Photos' : '🎥 Videos'} ({type === 'all' ? memories.length : memories.filter(m => m.type === type).length})
+              {type === 'all' ? '✨ All' : type === 'image' ? '📷 Photos' : '🎥 Videos'} ({type === 'all' ? memories.length : memories.filter(m => m.type === type).length})
             </button>
           ))}
         </div>

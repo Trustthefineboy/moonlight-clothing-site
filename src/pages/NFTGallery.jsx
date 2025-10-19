@@ -343,7 +343,7 @@ function NFTCard({ nft }) {
                 color: '#f59e0b',
                 fontWeight: 'bold'
               }}>
-                {nft.price} ETH
+                ₦{nft.price.toLocaleString()}
               </div>
             </div>
           </div>

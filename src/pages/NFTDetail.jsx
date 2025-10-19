@@ -288,10 +288,10 @@ export default function NFTDetail() {
                     fontWeight: 'bold',
                     color: '#f59e0b'
                   }}>
-                    {nft.price} ETH
+                    ₦{nft.price.toLocaleString()}
                   </div>
                   <div style={{ fontSize: '0.875rem', color: '#9ca3af' }}>
-                    ≈ ${(nft.price * 2000).toLocaleString()} USD
+                    Premium Digital Collectible
                   </div>
                 </div>
               </div>

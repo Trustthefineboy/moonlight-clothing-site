@@ -203,7 +203,10 @@ export default function Cart() {
                       cursor: (item.quantity || 1) <= 1 ? 'not-allowed' : 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      color: (item.quantity || 1) <= 1 ? '#999' : '#222'
                     }}
                   >
                     -
@@ -232,7 +235,10 @@ export default function Cart() {
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      color: '#222'
                     }}
                   >
                     +

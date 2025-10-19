@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
 import { useWishlist } from '../components/WishlistContext';
 import ImageZoomModal from '../components/ImageZoomModal';
+import { productsData } from '../data/productsData';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -19,36 +20,28 @@ export default function ProductDetail() {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [showZoom, setShowZoom] = useState(false);
 
-  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  const colors = ['Black', 'White', 'Blue', 'Brown', 'Green', 'Yellow', 'Multi-color'];
+  // Get sizes and colors from product data (will be set after product loads)
+  const sizes = product?.sizes || ['S', 'M', 'L', 'XL', 'XXL'];
+  const colors = product?.colors || ['Black', 'White', 'Blue'];
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/fabrics/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setProduct(data);
-        setLoading(false);
-        
-        // Fetch related products
-        fetch('http://localhost:5000/api/fabrics')
-          .then(res => res.json())
-          .then(allProducts => {
-            // Find products with same category or gender, excluding current product
-            const related = allProducts
-              .filter(p => p.id !== data.id)
-              .filter(p => 
-                (p.categories && data.categories && 
-                 p.categories.some(cat => data.categories.includes(cat))) ||
-                p.gender === data.gender
-              )
-              .slice(0, 4); // Show only 4 related products
-            setRelatedProducts(related);
-          });
-      })
-      .catch(err => {
-        setError('Failed to load product');
-        setLoading(false);
-      });
+    // Find product from static data
+    const foundProduct = productsData.find(p => p.id === parseInt(id));
+    setProduct(foundProduct || null);
+    setLoading(false);
+    
+    // Get related products
+    if (foundProduct) {
+      const related = productsData
+        .filter(p => p.id !== parseInt(id))
+        .filter(p => 
+          (p.categories && foundProduct.categories && 
+           p.categories.some(cat => foundProduct.categories.includes(cat))) ||
+          p.gender === foundProduct.gender
+        )
+        .slice(0, 4); // Show only 4 related products
+      setRelatedProducts(related);
+    }
   }, [id]);
 
   const handleAddToCart = () => {
@@ -224,6 +217,8 @@ export default function ProductDetail() {
                     borderRadius: '8px',
                     cursor: 'pointer',
                     fontWeight: selectedSize === size ? 'bold' : 'normal',
+                    color: '#222',
+                    fontSize: '0.95rem',
                     transition: 'all 0.2s'
                   }}
                 >
@@ -250,6 +245,8 @@ export default function ProductDetail() {
                     borderRadius: '8px',
                     cursor: 'pointer',
                     fontWeight: selectedColor === color ? 'bold' : 'normal',
+                    color: '#222',
+                    fontSize: '0.95rem',
                     transition: 'all 0.2s'
                   }}
                 >
@@ -275,7 +272,9 @@ export default function ProductDetail() {
                   backgroundColor: quantity <= 1 ? '#f5f5f5' : '#fff',
                   borderRadius: '8px',
                   cursor: quantity <= 1 ? 'not-allowed' : 'pointer',
-                  fontSize: '1.2rem'
+                  fontSize: '1.2rem',
+                  color: quantity <= 1 ? '#999' : '#222',
+                  fontWeight: 'bold'
                 }}
               >
                 -
@@ -292,7 +291,9 @@ export default function ProductDetail() {
                   backgroundColor: '#fff',
                   borderRadius: '8px',
                   cursor: 'pointer',
-                  fontSize: '1.2rem'
+                  fontSize: '1.2rem',
+                  color: '#222',
+                  fontWeight: 'bold'
                 }}
               >
                 +
