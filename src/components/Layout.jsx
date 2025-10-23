@@ -16,18 +16,8 @@ const navLinks = [
 
 export default function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const { wishlistCount } = useWishlist();
   const { cart } = useCart();
-
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   return (
     <div
@@ -48,7 +38,7 @@ export default function Layout({ children }) {
           width: '100%',
           background: '#fff',
           borderBottom: '1px solid #e0eafc',
-          padding: isMobile ? '0.5rem 1rem' : '1rem',
+          padding: 'clamp(0.5rem, 1vw, 1rem) clamp(0.75rem, 2vw, 1.5rem)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -56,97 +46,102 @@ export default function Layout({ children }) {
           position: 'sticky',
           top: 0,
           zIndex: 1000,
-          minHeight: isMobile ? '50px' : '70px'
+          gap: 'clamp(0.5rem, 1vw, 1rem)',
+          overflowX: 'auto'
         }}
       >
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
           <img 
             src="/images/moonlight-logo.png" 
             alt="Moonlight Clothings" 
             style={{ 
-              height: isMobile ? '28px' : '50px', 
+              height: 'clamp(32px, 5vw, 50px)', 
               width: 'auto',
               objectFit: 'contain'
             }}
           />
         </Link>
-        <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', alignItems: 'center' }}>
-          {/* Desktop Navigation */}
-          {!isMobile && (
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  style={{
-                    color: '#1976d2',
-                    textDecoration: 'none',
-                    fontWeight: 'bold',
-                    transition: 'color 0.3s'
-                  }}
-                  onMouseEnter={(e) => e.target.style.color = '#4169E1'}
-                  onMouseLeave={(e) => e.target.style.color = '#1976d2'}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              
-              {/* Orders Link */}
-              <Link
-                to="/orders"
-                style={{
-                  color: '#1976d2',
-                  textDecoration: 'none',
-                  fontWeight: 'bold',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.3rem',
-                  transition: 'color 0.3s'
-                }}
-                onMouseEnter={(e) => e.target.style.color = '#4169E1'}
-                onMouseLeave={(e) => e.target.style.color = '#1976d2'}
-              >
-                📦 Orders
-              </Link>
-              
-              {/* Profile Link */}
-              <Link
-                to="/profile"
-                style={{
-                  color: '#1976d2',
-                  textDecoration: 'none',
-                  fontWeight: 'bold',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.3rem',
-                  transition: 'color 0.3s'
-                }}
-                onMouseEnter={(e) => e.target.style.color = '#4169E1'}
-                onMouseLeave={(e) => e.target.style.color = '#1976d2'}
-              >
-                👤 Account
-              </Link>
-            </div>
-          )}
+        
+        {/* All Navigation - Always visible, scrollable on small screens */}
+        <div style={{ 
+          display: 'flex', 
+          gap: 'clamp(0.5rem, 1.5vw, 1.5rem)', 
+          alignItems: 'center',
+          flexWrap: 'nowrap',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}>
+          <style>{`
+            nav > div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
           
-          {/* Search Icon - Mobile */}
-          {isMobile && (
+          {navLinks.map(link => (
             <Link
-              to="/shop"
+              key={link.to}
+              to={link.to}
               style={{
                 color: '#1976d2',
                 textDecoration: 'none',
-                fontSize: '1.2rem',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0.5rem'
+                fontWeight: 'bold',
+                transition: 'color 0.3s',
+                fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
               }}
+              onMouseEnter={(e) => e.target.style.color = '#4169E1'}
+              onMouseLeave={(e) => e.target.style.color = '#1976d2'}
             >
-              🔍
+              {link.label}
             </Link>
-          )}
+          ))}
           
-          {/* Wishlist Link with Badge - Always visible */}
+          {/* Orders Link */}
+          <Link
+            to="/orders"
+            style={{
+              color: '#1976d2',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              transition: 'color 0.3s',
+              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
+            }}
+            onMouseEnter={(e) => e.target.style.color = '#4169E1'}
+            onMouseLeave={(e) => e.target.style.color = '#1976d2'}
+          >
+            📦 Orders
+          </Link>
+          
+          {/* Profile Link */}
+          <Link
+            to="/profile"
+            style={{
+              color: '#1976d2',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.3rem',
+              transition: 'color 0.3s',
+              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
+            }}
+            onMouseEnter={(e) => e.target.style.color = '#4169E1'}
+            onMouseLeave={(e) => e.target.style.color = '#1976d2'}
+          >
+            👤 Account
+          </Link>
+          
+          {/* Wishlist Link with Badge */}
           <Link
             to="/wishlist"
             style={{
@@ -158,27 +153,28 @@ export default function Layout({ children }) {
               alignItems: 'center',
               gap: '0.3rem',
               transition: 'color 0.3s',
-              fontSize: isMobile ? '1.2rem' : '1rem',
-              padding: isMobile ? '0.5rem' : '0'
+              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
             onMouseEnter={(e) => e.target.style.color = '#4169E1'}
             onMouseLeave={(e) => e.target.style.color = '#1976d2'}
           >
-            💝 {!isMobile && 'Wishlist'}
+            💝 Wishlist
             {wishlistCount > 0 && (
               <span style={{
                 position: 'absolute',
-                top: isMobile ? '-2px' : '-8px',
-                right: isMobile ? '-2px' : '-10px',
+                top: '-8px',
+                right: '-10px',
                 background: '#ff4444',
                 color: 'white',
                 borderRadius: '50%',
-                width: '20px',
-                height: '20px',
+                width: 'clamp(16px, 2vw, 20px)',
+                height: 'clamp(16px, 2vw, 20px)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '0.75rem',
+                fontSize: 'clamp(0.65rem, 1vw, 0.75rem)',
                 fontWeight: 'bold'
               }}>
                 {wishlistCount}
@@ -186,7 +182,7 @@ export default function Layout({ children }) {
             )}
           </Link>
           
-          {/* Cart Link with Badge - Always visible */}
+          {/* Cart Link with Badge */}
           <Link
             to="/cart"
             style={{
@@ -198,114 +194,35 @@ export default function Layout({ children }) {
               alignItems: 'center',
               gap: '0.3rem',
               transition: 'color 0.3s',
-              fontSize: isMobile ? '1.2rem' : '1rem',
-              padding: isMobile ? '0.5rem' : '0'
+              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
             onMouseEnter={(e) => e.target.style.color = '#4169E1'}
             onMouseLeave={(e) => e.target.style.color = '#1976d2'}
           >
-            🛒 {!isMobile && 'Cart'}
+            🛒 Cart
             {cart.length > 0 && (
               <span style={{
                 position: 'absolute',
-                top: isMobile ? '-2px' : '-8px',
-                right: isMobile ? '-2px' : '-10px',
+                top: '-8px',
+                right: '-10px',
                 background: '#FFD700',
                 color: '#222',
                 borderRadius: '50%',
-                width: isMobile ? '16px' : '20px',
-                height: isMobile ? '16px' : '20px',
+                width: 'clamp(16px, 2vw, 20px)',
+                height: 'clamp(16px, 2vw, 20px)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '0.7rem',
+                fontSize: 'clamp(0.65rem, 1vw, 0.75rem)',
                 fontWeight: 'bold'
               }}>
                 {cart.length}
               </span>
             )}
           </Link>
-          
-          {/* Mobile Menu Button */}
-          {isMobile && (
-            <button
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '1.3rem',
-                color: '#4f8cff',
-                padding: '0.5rem'
-              }}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? '✕' : '☰'}
-            </button>
-          )}
         </div>
-        
-        {/* Mobile Menu Dropdown */}
-        {isMobile && menuOpen && (
-          <div style={{
-            position: 'absolute',
-            top: '50px',
-            right: '0',
-            left: '0',
-            backgroundColor: 'white',
-            borderBottom: '2px solid #e0eafc',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            zIndex: 1000
-          }}>
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  display: 'block',
-                  padding: '0.875rem 1rem',
-                  color: '#1976d2',
-                  textDecoration: 'none',
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid #f0f0f0',
-                  fontSize: '0.95rem'
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              to="/orders"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                display: 'block',
-                padding: '0.875rem 1rem',
-                color: '#1976d2',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                borderBottom: '1px solid #f0f0f0',
-                fontSize: '0.95rem'
-              }}
-            >
-              📦 Orders
-            </Link>
-            <Link
-              to="/profile"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                display: 'block',
-                padding: '0.875rem 1rem',
-                color: '#1976d2',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                borderBottom: '1px solid #f0f0f0',
-                fontSize: '0.95rem'
-              }}
-            >
-              👤 Account
-            </Link>
-          </div>
-        )}
       </nav>
       <main style={{ flex: 1, width: '100%' }}>{children}</main>
       <ScrollToTop />
