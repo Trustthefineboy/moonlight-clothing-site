@@ -138,19 +138,24 @@ export default function Gallery() {
       }}>
         <h1 style={{ 
           fontSize: 'clamp(2rem, 5vw, 3rem)',
-          color: '#4f8cff',
-          marginBottom: '1rem'
+          color: '#222',
+          marginBottom: '0.5rem'
         }}>
-          Our Gallery
+          Moments of Light
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
           color: '#666',
-          maxWidth: '600px',
-          margin: '0 auto'
+          maxWidth: '700px',
+          margin: '0 auto 2rem'
         }}>
-          Explore our collection of designs, fabrics, and behind-the-scenes content
+          Showcase of fashion events, fabrics, and sacred highlights
         </p>
+        <div style={{ marginTop: '2rem', marginBottom: '1.5rem' }}>
+          <h2 style={{ fontSize: '1.6rem', color: '#4f8cff', margin: '1rem 0' }}>Walk of Legacy</h2>
+          <h2 style={{ fontSize: '1.6rem', color: '#4f8cff', margin: '1rem 0' }}>Sacred Fabrics Unveiled</h2>
+          <h2 style={{ fontSize: '1.6rem', color: '#4f8cff', margin: '1rem 0' }}>When God Walked the Runway</h2>
+        </div>
       </div>
 
       {/* Category Filter */}

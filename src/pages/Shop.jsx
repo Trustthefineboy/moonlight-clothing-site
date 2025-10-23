@@ -48,6 +48,26 @@ export default function Shop() {
       {/* Header */}
       <div style={{ 
         marginBottom: '2rem',
+        textAlign: 'center'
+      }}>
+        <h1 style={{ 
+          fontSize: 'clamp(2rem, 5vw, 3rem)', 
+          marginBottom: '1rem',
+          color: '#222'
+        }}>
+          Moonlight Collections
+        </h1>
+        <p style={{
+          fontSize: 'clamp(1rem, 2vw, 1.3rem)',
+          color: '#666',
+          maxWidth: '700px',
+          margin: '0 auto 1.5rem',
+          lineHeight: 1.6,
+          fontStyle: 'italic'
+        }}>
+          "Each Moonlight fabric carries a story, a covenant of creativity. Choose yours — wear your light."
+        </p>
+      </div>
         borderBottom: '3px solid #FFD700',
         paddingBottom: '1rem'
       }}>

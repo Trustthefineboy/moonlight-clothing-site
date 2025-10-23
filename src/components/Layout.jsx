@@ -285,10 +285,13 @@ export default function Layout({ children }) {
           background: '#f5f7fa',
           color: '#222',
           textAlign: 'center',
-          padding: '1rem',
+          padding: '2rem 1rem',
           borderTop: '1px solid #e0eafc',
         }}
       >
+        <p style={{ fontStyle: 'italic', marginBottom: '0.5rem', fontSize: '1.1rem' }}>
+          "We are Moonlight — born of God, built by culture, walking in eternal legacy."
+        </p>
         <p>&copy; {new Date().getFullYear()} Moonlight Clothings. All rights reserved.</p>
       </footer>
     </div>

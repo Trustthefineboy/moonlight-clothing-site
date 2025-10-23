@@ -156,28 +156,41 @@ export default function Home() {
             style={{
               fontSize: 'clamp(1.8rem, 6vw, 4rem)',
               fontWeight: 'bold',
-              marginBottom: '1rem',
+              marginBottom: '0.5rem',
               textShadow: '0 2px 10px rgba(0,0,0,0.3)',
               lineHeight: 1.2
             }}
           >
-            Welcome to Moonlight Clothings
+            Communicating Love Through Fashion
           </h1>
-          <p
+          <h2
             style={{
-              fontSize: 'clamp(1rem, 2.5vw, 1.6rem)',
-              maxWidth: '800px',
-              margin: '0 auto 1.5rem',
-              textShadow: '0 2px 5px rgba(0,0,0,0.3)',
-              lineHeight: 1.5,
-              padding: '0 1rem'
+              fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+              fontWeight: '500',
+              marginBottom: '1rem',
+              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+              lineHeight: 1.2,
+              fontStyle: 'italic'
             }}
           >
-            Discover the beauty of African luxury and soulful designs. Let the moon guide your style journey.
+            Connecting Tribes Through Fabrics
+          </h2>
+          <p
+            style={{
+              fontSize: 'clamp(1rem, 2.5vw, 1.3rem)',
+              maxWidth: '700px',
+              margin: '0 auto 1.5rem',
+              textShadow: '0 2px 5px rgba(0,0,0,0.3)',
+              lineHeight: 1.6,
+              padding: '0 1rem',
+              fontWeight: '300'
+            }}
+          >
+            Moonlight Clothings is more than fashion — it is light woven into culture, a divine bridge between tradition and creation.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', padding: '0 1rem' }}>
             <Link 
-              to="/shop"
+              to="/fabric"
               style={{
                 padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)',
                 fontSize: '1.1rem',
@@ -200,12 +213,14 @@ export default function Home() {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              Shop Now
+              Explore Collections
             </Link>
-            <Link 
-              to="/about"
+            <a 
+              href="https://wa.me/2348168279958"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                padding: '1rem 2.5rem',
+                padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)',
                 fontSize: '1.1rem',
                 backgroundColor: 'transparent',
                 color: '#fff',
@@ -226,8 +241,8 @@ export default function Home() {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              Our Story
-            </Link>
+              Join the Community
+            </a>
           </div>
         </div>
         
@@ -491,13 +506,13 @@ export default function Home() {
       }}>
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <h2 style={{ 
-            marginBottom: '1rem',
+            marginBottom: '0.5rem',
             fontSize: 'clamp(1.8rem, 4vw, 2.5rem)'
           }}>
-            Join Our Newsletter
+            Light Dispatch
           </h2>
-          <p style={{ marginBottom: '2rem' }}>
-            Subscribe to get updates on new collections, special offers and styling tips.
+          <p style={{ marginBottom: '2rem', fontStyle: 'italic' }}>
+            Subscribe to receive sacred updates, events, and revelations from Moonlight Clothings.
           </p>
           <form 
             onSubmit={handleNewsletterSubscribe}
