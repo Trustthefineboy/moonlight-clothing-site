@@ -48,24 +48,29 @@ export default function Layout({ children }) {
           width: '100%',
           background: '#fff',
           borderBottom: '1px solid #e0eafc',
-          padding: isMobile ? '0.75rem 1rem' : '1rem',
+          padding: isMobile ? '0.5rem 1rem' : '1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
           position: 'sticky',
           top: 0,
-          zIndex: 1000
+          zIndex: 1000,
+          minHeight: isMobile ? '50px' : '70px'
         }}
       >
         <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img 
             src="/images/moonlight-logo.png" 
             alt="Moonlight Clothings" 
-            style={{ height: isMobile ? '32px' : '50px', width: 'auto' }}
+            style={{ 
+              height: isMobile ? '28px' : '50px', 
+              width: 'auto',
+              objectFit: 'contain'
+            }}
           />
         </Link>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', alignItems: 'center' }}>
           {/* Desktop Navigation */}
           {!isMobile && (
             <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
@@ -124,6 +129,23 @@ export default function Layout({ children }) {
             </div>
           )}
           
+          {/* Search Icon - Mobile */}
+          {isMobile && (
+            <Link
+              to="/shop"
+              style={{
+                color: '#1976d2',
+                textDecoration: 'none',
+                fontSize: '1.2rem',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.5rem'
+              }}
+            >
+              🔍
+            </Link>
+          )}
+          
           {/* Wishlist Link with Badge - Always visible */}
           <Link
             to="/wishlist"
@@ -135,7 +157,9 @@ export default function Layout({ children }) {
               display: 'flex',
               alignItems: 'center',
               gap: '0.3rem',
-              transition: 'color 0.3s'
+              transition: 'color 0.3s',
+              fontSize: isMobile ? '1.2rem' : '1rem',
+              padding: isMobile ? '0.5rem' : '0'
             }}
             onMouseEnter={(e) => e.target.style.color = '#4169E1'}
             onMouseLeave={(e) => e.target.style.color = '#1976d2'}
@@ -144,8 +168,8 @@ export default function Layout({ children }) {
             {wishlistCount > 0 && (
               <span style={{
                 position: 'absolute',
-                top: '-8px',
-                right: '-10px',
+                top: isMobile ? '-2px' : '-8px',
+                right: isMobile ? '-2px' : '-10px',
                 background: '#ff4444',
                 color: 'white',
                 borderRadius: '50%',
@@ -173,7 +197,9 @@ export default function Layout({ children }) {
               display: 'flex',
               alignItems: 'center',
               gap: '0.3rem',
-              transition: 'color 0.3s'
+              transition: 'color 0.3s',
+              fontSize: isMobile ? '1.2rem' : '1rem',
+              padding: isMobile ? '0.5rem' : '0'
             }}
             onMouseEnter={(e) => e.target.style.color = '#4169E1'}
             onMouseLeave={(e) => e.target.style.color = '#1976d2'}
@@ -182,17 +208,17 @@ export default function Layout({ children }) {
             {cart.length > 0 && (
               <span style={{
                 position: 'absolute',
-                top: '-8px',
-                right: '-10px',
+                top: isMobile ? '-2px' : '-8px',
+                right: isMobile ? '-2px' : '-10px',
                 background: '#FFD700',
                 color: '#222',
                 borderRadius: '50%',
-                width: '20px',
-                height: '20px',
+                width: isMobile ? '16px' : '20px',
+                height: isMobile ? '16px' : '20px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '0.75rem',
+                fontSize: '0.7rem',
                 fontWeight: 'bold'
               }}>
                 {cart.length}
@@ -207,8 +233,9 @@ export default function Layout({ children }) {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                fontSize: '1.5rem',
+                fontSize: '1.3rem',
                 color: '#4f8cff',
+                padding: '0.5rem'
               }}
               onClick={() => setMenuOpen(!menuOpen)}
             >
@@ -221,7 +248,7 @@ export default function Layout({ children }) {
         {isMobile && menuOpen && (
           <div style={{
             position: 'absolute',
-            top: '70px',
+            top: '50px',
             right: '0',
             left: '0',
             backgroundColor: 'white',
@@ -236,11 +263,12 @@ export default function Layout({ children }) {
                 onClick={() => setMenuOpen(false)}
                 style={{
                   display: 'block',
-                  padding: '1rem',
+                  padding: '0.875rem 1rem',
                   color: '#1976d2',
                   textDecoration: 'none',
                   fontWeight: 'bold',
-                  borderBottom: '1px solid #f0f0f0'
+                  borderBottom: '1px solid #f0f0f0',
+                  fontSize: '0.95rem'
                 }}
               >
                 {link.label}
@@ -251,11 +279,12 @@ export default function Layout({ children }) {
               onClick={() => setMenuOpen(false)}
               style={{
                 display: 'block',
-                padding: '1rem',
+                padding: '0.875rem 1rem',
                 color: '#1976d2',
                 textDecoration: 'none',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #f0f0f0'
+                borderBottom: '1px solid #f0f0f0',
+                fontSize: '0.95rem'
               }}
             >
               📦 Orders
@@ -265,11 +294,12 @@ export default function Layout({ children }) {
               onClick={() => setMenuOpen(false)}
               style={{
                 display: 'block',
-                padding: '1rem',
+                padding: '0.875rem 1rem',
                 color: '#1976d2',
                 textDecoration: 'none',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #f0f0f0'
+                borderBottom: '1px solid #f0f0f0',
+                fontSize: '0.95rem'
               }}
             >
               👤 Account
