@@ -190,7 +190,7 @@ export default function Home() {
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', padding: '0 1rem' }}>
             <Link 
-              to="/fabric"
+              to="/shop"
               style={{
                 padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)',
                 fontSize: '1.1rem',
