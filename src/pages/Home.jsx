@@ -142,42 +142,44 @@ export default function Home() {
           padding: '2rem'
         }}
       >
-        <div style={{ maxWidth: '800px', zIndex: 1 }}>
+        <div style={{ maxWidth: '800px', zIndex: 1, padding: '0 1rem' }}>
           <img
             src="/images/moonlight-logo.png"
             alt="Moonlight Clothings Logo"
             style={{
-              width: 'min(280px, 80vw)',
-              marginBottom: 24,
+              width: 'min(220px, 70vw)',
+              marginBottom: '1.5rem',
               boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
             }}
           />
           <h1
             style={{
-              fontSize: 'clamp(2.5rem, 8vw, 4rem)',
+              fontSize: 'clamp(1.8rem, 6vw, 4rem)',
               fontWeight: 'bold',
-              marginBottom: '1.5rem',
-              textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+              marginBottom: '1rem',
+              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+              lineHeight: 1.2
             }}
           >
             Welcome to Moonlight Clothings
           </h1>
           <p
             style={{
-              fontSize: 'clamp(1.1rem, 3vw, 1.6rem)',
+              fontSize: 'clamp(1rem, 2.5vw, 1.6rem)',
               maxWidth: '800px',
-              margin: '0 auto 2rem',
+              margin: '0 auto 1.5rem',
               textShadow: '0 2px 5px rgba(0,0,0,0.3)',
-              lineHeight: 1.6
+              lineHeight: 1.5,
+              padding: '0 1rem'
             }}
           >
             Discover the beauty of African luxury and soulful designs. Let the moon guide your style journey.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', padding: '0 1rem' }}>
             <Link 
               to="/shop"
               style={{
-                padding: '1rem 2.5rem',
+                padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)',
                 fontSize: '1.1rem',
                 backgroundColor: '#4f8cff',
                 color: '#fff',

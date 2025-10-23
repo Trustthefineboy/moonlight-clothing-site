@@ -16,9 +16,18 @@ const navLinks = [
 
 export default function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
   const { wishlistCount } = useWishlist();
   const { cart } = useCart();
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div
@@ -39,18 +48,21 @@ export default function Layout({ children }) {
           width: '100%',
           background: '#fff',
           borderBottom: '1px solid #e0eafc',
-          padding: '1rem',
+          padding: isMobile ? '0.75rem 1rem' : '1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000
         }}
       >
         <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img 
             src="/images/moonlight-logo.png" 
             alt="Moonlight Clothings" 
-            style={{ height: '50px', width: 'auto' }}
+            style={{ height: isMobile ? '40px' : '50px', width: 'auto' }}
           />
         </Link>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
