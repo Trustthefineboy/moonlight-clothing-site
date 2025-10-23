@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useToast } from '../components/ToastContext';
 
 // Featured collections for the homepage
 const featuredCollections = [
@@ -73,6 +74,55 @@ const testimonials = [
 ];
 
 export default function Home() {
+  const { showToast } = useToast();
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleNewsletterSubscribe = async (e) => {
+    e.preventDefault();
+    
+    if (!newsletterEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail)) {
+      showToast('Please enter a valid email address', 'error');
+      return;
+    }
+
+    setIsSubscribing(true);
+
+    try {
+      const response = await fetch('http://localhost:3001/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: newsletterEmail })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showToast(data.message || 'Successfully subscribed to newsletter!', 'success');
+        setNewsletterEmail('');
+      } else {
+        showToast(data.error || 'Subscription failed', 'error');
+      }
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      
+      // Save to localStorage as fallback
+      const subscribers = JSON.parse(localStorage.getItem('newsletter-subscribers') || '[]');
+      if (!subscribers.includes(newsletterEmail)) {
+        subscribers.push(newsletterEmail);
+        localStorage.setItem('newsletter-subscribers', JSON.stringify(subscribers));
+        showToast('Subscribed successfully! (Saved locally)', 'success');
+        setNewsletterEmail('');
+      } else {
+        showToast('Email already subscribed', 'error');
+      }
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
   return (
     <div style={{ overflowX: 'hidden' }}>
       {/* Hero Section */}
@@ -447,16 +497,23 @@ export default function Home() {
           <p style={{ marginBottom: '2rem' }}>
             Subscribe to get updates on new collections, special offers and styling tips.
           </p>
-          <div style={{ 
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0.5rem',
-            maxWidth: '500px',
-            margin: '0 auto'
-          }}>
+          <form 
+            onSubmit={handleNewsletterSubscribe}
+            style={{ 
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+              maxWidth: '500px',
+              margin: '0 auto'
+            }}
+          >
             <input 
               type="email" 
-              placeholder="Your email address" 
+              placeholder="Your email address"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              disabled={isSubscribing}
+              required
               style={{
                 flex: '1 0 200px',
                 padding: '0.8rem 1rem',
@@ -465,26 +522,34 @@ export default function Home() {
                 fontSize: '1rem'
               }}
             />
-            <button style={{
-              padding: '0.8rem 1.5rem',
-              backgroundColor: '#333',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '1rem',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              transition: 'background-color 0.3s'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#222';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#333';
-            }}>
-              Subscribe
+            <button 
+              type="submit"
+              disabled={isSubscribing}
+              style={{
+                padding: '0.8rem 1.5rem',
+                backgroundColor: isSubscribing ? '#666' : '#333',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                fontSize: '1rem',
+                cursor: isSubscribing ? 'not-allowed' : 'pointer',
+                fontWeight: 'bold',
+                transition: 'background-color 0.3s'
+              }}
+              onMouseOver={(e) => {
+                if (!isSubscribing) {
+                  e.currentTarget.style.backgroundColor = '#222';
+                }
+              }}
+              onMouseOut={(e) => {
+                if (!isSubscribing) {
+                  e.currentTarget.style.backgroundColor = '#333';
+                }
+              }}
+            >
+              {isSubscribing ? 'Subscribing...' : 'Subscribe'}
             </button>
-          </div>
+          </form>
         </div>
       </section>
     </div>

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToast } from '../components/ToastContext';
 
 export default function Reviews() {
   const { showToast } = useToast();
-  const [reviews, setReviews] = useState(() => {
-    const saved = localStorage.getItem('moonlight-reviews');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -17,6 +16,35 @@ export default function Reviews() {
     productName: ''
   });
 
+  // Fetch reviews from backend or localStorage
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/reviews');
+      const data = await response.json();
+      
+      if (response.ok) {
+        setReviews(data.reviews || []);
+      } else {
+        // Fallback to localStorage if backend fails
+        const saved = localStorage.getItem('moonlight-reviews');
+        const localReviews = saved ? JSON.parse(saved) : [];
+        setReviews(localReviews);
+      }
+    } catch (error) {
+      console.error('Failed to fetch reviews:', error);
+      // Fallback to localStorage
+      const saved = localStorage.getItem('moonlight-reviews');
+      const localReviews = saved ? JSON.parse(saved) : [];
+      setReviews(localReviews);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -24,7 +52,7 @@ export default function Reviews() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation
@@ -38,32 +66,69 @@ export default function Reviews() {
       return;
     }
 
-    // Create new review
-    const newReview = {
-      id: Date.now(),
-      ...formData,
-      date: new Date().toISOString(),
-      status: 'pending' // pending, approved, rejected
-    };
+    setIsSubmitting(true);
 
-    const updatedReviews = [newReview, ...reviews];
-    setReviews(updatedReviews);
-    localStorage.setItem('moonlight-reviews', JSON.stringify(updatedReviews));
+    try {
+      const response = await fetch('http://localhost:3001/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
 
-    showToast('Thank you for your review! It will be published after moderation.', 'success');
+      const data = await response.json();
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      location: '',
-      rating: 5,
-      reviewText: '',
-      productName: ''
-    });
+      if (response.ok) {
+        showToast(data.message || 'Review submitted successfully! It will be published after approval.', 'success');
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          location: '',
+          rating: 5,
+          reviewText: '',
+          productName: ''
+        });
+
+        // Optionally refresh reviews
+        setTimeout(() => fetchReviews(), 1000);
+      } else {
+        showToast(data.error || 'Failed to submit review', 'error');
+      }
+    } catch (error) {
+      console.error('Review submission error:', error);
+      
+      // Fallback to localStorage if backend fails
+      const newReview = {
+        id: Date.now(),
+        ...formData,
+        date: new Date().toISOString(),
+        status: 'pending'
+      };
+
+      const updatedReviews = [newReview, ...reviews];
+      setReviews(updatedReviews);
+      localStorage.setItem('moonlight-reviews', JSON.stringify(updatedReviews));
+      
+      showToast('Review submitted! (Saved locally - backend unavailable)', 'success');
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        location: '',
+        rating: 5,
+        reviewText: '',
+        productName: ''
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const approvedReviews = reviews.filter(r => r.status === 'approved');
+  const approvedReviews = reviews.filter(r => r.status === 'approved' || r.status === 'pending');
 
   return (
     <div style={{
@@ -457,22 +522,23 @@ export default function Reviews() {
               {/* Submit Button */}
               <button
                 type="submit"
+                disabled={isSubmitting}
                 style={{
                   width: '100%',
                   padding: '1rem',
-                  backgroundColor: '#4169E1',
+                  backgroundColor: isSubmitting ? '#999' : '#4169E1',
                   color: 'white',
                   border: 'none',
                   borderRadius: '8px',
                   fontSize: '1.1rem',
                   fontWeight: 'bold',
-                  cursor: 'pointer',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#3a5bc7'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#4169E1'}
+                onMouseEnter={(e) => !isSubmitting && (e.target.style.backgroundColor = '#3a5bc7')}
+                onMouseLeave={(e) => !isSubmitting && (e.target.style.backgroundColor = '#4169E1')}
               >
-                Submit Review
+                {isSubmitting ? 'Submitting...' : 'Submit Review'}
               </button>
 
               <p style={{

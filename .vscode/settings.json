@@ -1,4 +1,4 @@
-﻿{
+{
     "chat.agent.maxRequests": 200,
     "files.watcherExclude": {
         "**/node_modules/**": true,
@@ -69,5 +69,6 @@
     "css.validate": false,
     "html.validate.scripts": false,
     "html.validate.styles": false,
-    "json.schemaDownload.enable": false
+    "json.schemaDownload.enable": false,
+    "terminal.integrated.gpuAcceleration": "off"
 }
