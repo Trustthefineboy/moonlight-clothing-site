@@ -17,11 +17,17 @@ const categories = [
 
 const genders = ['Men', 'Women', 'Unisex'];
 const types = ['Shirts', 'Two pieces', 'Kaftan', 'Palazzo casual trousers'];
+const cultures = ['Yoruba', 'Pan-African'];
+const colorThemes = ['Black', 'White', 'Indigo', 'Gold'];
+const storyThemes = ['Covenant', 'Legacy'];
 
 export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedType, setSelectedType] = useState('');
+  const [selectedCulture, setSelectedCulture] = useState('');
+  const [selectedColorTheme, setSelectedColorTheme] = useState('');
+  const [selectedStoryTheme, setSelectedStoryTheme] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('');
 
@@ -33,11 +39,14 @@ export default function Shop() {
     setSelectedCategory('');
     setSelectedGender('');
     setSelectedType('');
+    setSelectedCulture('');
+    setSelectedColorTheme('');
+    setSelectedStoryTheme('');
     setSearchQuery('');
     setSortBy('');
   };
 
-  const hasActiveFilters = selectedCategory || selectedGender || selectedType || searchQuery || sortBy;
+  const hasActiveFilters = selectedCategory || selectedGender || selectedType || selectedCulture || selectedColorTheme || selectedStoryTheme || searchQuery || sortBy;
 
   return (
     <div style={{ 
@@ -261,6 +270,78 @@ export default function Shop() {
               <option value="newest">Newest First</option>
             </select>
           </div>
+
+          {/* Culture Filter */}
+          <div style={{ flex: 1, minWidth: '180px' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem',
+              fontSize: '0.9rem',
+              fontWeight: 'bold',
+              color: '#555'
+            }}>
+              🌍 Culture
+            </label>
+            <select 
+              className="shop-select" 
+              value={selectedCulture} 
+              onChange={e => setSelectedCulture(e.target.value)}
+              style={{ width: '100%' }}
+            >
+              <option value="">All Cultures</option>
+              {cultures.map(c => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Color Theme Filter */}
+          <div style={{ flex: 1, minWidth: '180px' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem',
+              fontSize: '0.9rem',
+              fontWeight: 'bold',
+              color: '#555'
+            }}>
+              🎨 Color Theme
+            </label>
+            <select 
+              className="shop-select" 
+              value={selectedColorTheme} 
+              onChange={e => setSelectedColorTheme(e.target.value)}
+              style={{ width: '100%' }}
+            >
+              <option value="">All Colors</option>
+              {colorThemes.map(c => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Story Theme Filter */}
+          <div style={{ flex: 1, minWidth: '180px' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem',
+              fontSize: '0.9rem',
+              fontWeight: 'bold',
+              color: '#555'
+            }}>
+              📖 Story Theme
+            </label>
+            <select 
+              className="shop-select" 
+              value={selectedStoryTheme} 
+              onChange={e => setSelectedStoryTheme(e.target.value)}
+              style={{ width: '100%' }}
+            >
+              <option value="">All Themes</option>
+              {storyThemes.map(t => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -269,6 +350,9 @@ export default function Shop() {
         category: selectedCategory, 
         gender: selectedGender, 
         type: selectedType, 
+        culture: selectedCulture,
+        colorTheme: selectedColorTheme,
+        storyTheme: selectedStoryTheme,
         search: searchQuery,
         sortBy: sortBy
       }} />

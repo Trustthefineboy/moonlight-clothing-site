@@ -61,6 +61,15 @@ export default function FabricList({ filter = {} }) {
   if (filter.type) {
     filtered = filtered.filter(f => f.products && f.products.includes(filter.type));
   }
+  if (filter.culture) {
+    filtered = filtered.filter(f => f.culture === filter.culture);
+  }
+  if (filter.colorTheme) {
+    filtered = filtered.filter(f => f.colorTheme === filter.colorTheme);
+  }
+  if (filter.storyTheme) {
+    filtered = filtered.filter(f => f.storyTheme === filter.storyTheme);
+  }
 
   // Sorting logic
   if (filter.sortBy) {
@@ -238,6 +247,22 @@ export default function FabricList({ filter = {} }) {
                 fontWeight: 'bold',
                 lineHeight: 1.3
               }}>{fabric.name}</h3>
+              
+              {/* Proverb */}
+              {fabric.proverb && (
+                <p style={{
+                  fontSize: '0.85rem',
+                  fontStyle: 'italic',
+                  color: '#888',
+                  marginBottom: '0.75rem',
+                  lineHeight: 1.4,
+                  borderLeft: '3px solid #FFD700',
+                  paddingLeft: '0.75rem'
+                }}>
+                  {fabric.proverb}
+                </p>
+              )}
+              
               <p style={{ 
                 color: '#666',
                 fontSize: '0.9rem',
@@ -245,10 +270,26 @@ export default function FabricList({ filter = {} }) {
                 flex: 1,
                 lineHeight: 1.5,
                 display: '-webkit-box',
-                WebkitLineClamp: 3,
+                WebkitLineClamp: 2,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden'
               }}>{fabric.story}</p>
+              
+              {/* Read More Link */}
+              <Link
+                to={`/product/${fabric.id}`}
+                style={{
+                  color: '#4f8cff',
+                  fontSize: '0.85rem',
+                  fontWeight: 'bold',
+                  textDecoration: 'none',
+                  marginBottom: '0.75rem',
+                  display: 'inline-block'
+                }}
+              >
+                Read More →
+              </Link>
+              
               <div style={{ 
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
@@ -259,6 +300,37 @@ export default function FabricList({ filter = {} }) {
               }}>
                 ₦{typeof fabric.price === 'number' ? fabric.price.toLocaleString() : fabric.price}
               </div>
+              
+              {/* WhatsApp Button */}
+              <a
+                href={`https://wa.me/${fabric.whatsapp?.replace(/[^0-9]/g, '')}?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(fabric.name)}%20-%20₦${encodeURIComponent(typeof fabric.price === 'number' ? fabric.price.toLocaleString() : fabric.price)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  backgroundColor: '#25D366',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  padding: '0.75rem',
+                  borderRadius: 8,
+                  textDecoration: 'none',
+                  marginBottom: '0.75rem',
+                  transition: 'all 0.3s',
+                  fontSize: '0.95rem'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#128C7E';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = '#25D366';
+                }}
+              >
+                📱 Order/Enquire on WhatsApp
+              </a>
+              
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: 'auto' }}>
                 {/* Quick View and Add to Cart */}
                 <div style={{ display: 'flex', gap: '0.5rem' }}>

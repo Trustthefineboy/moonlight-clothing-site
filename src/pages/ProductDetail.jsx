@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
 import { useWishlist } from '../components/WishlistContext';
 import ImageZoomModal from '../components/ImageZoomModal';
+import QRCodeDisplay from '../components/QRCodeDisplay';
 import { productsData } from '../data/productsData';
 
 export default function ProductDetail() {
@@ -151,6 +152,21 @@ export default function ProductDetail() {
           <h1 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#222' }}>
             {product.name}
           </h1>
+
+          {/* Proverb */}
+          {product.proverb && (
+            <div style={{
+              fontSize: '1rem',
+              fontStyle: 'italic',
+              color: '#888',
+              marginBottom: '1.5rem',
+              paddingLeft: '1rem',
+              borderLeft: '4px solid #FFD700',
+              lineHeight: 1.6
+            }}>
+              {product.proverb}
+            </div>
+          )}
 
           <div style={{
             fontSize: '2rem',
@@ -394,11 +410,28 @@ export default function ProductDetail() {
               borderRadius: '8px',
               fontSize: '1rem',
               fontWeight: 'bold',
-              marginBottom: '1rem'
+              marginBottom: '1.5rem'
             }}
           >
-            📱 Order via WhatsApp
+            📱 Order/Enquire on WhatsApp
           </a>
+
+          {/* QR Code for Easy Sharing */}
+          <div style={{
+            padding: '1.5rem',
+            backgroundColor: '#f8f9fa',
+            borderRadius: '12px',
+            marginBottom: '1.5rem',
+            textAlign: 'center'
+          }}>
+            <h3 style={{ fontSize: '1rem', marginBottom: '1rem', color: '#444' }}>
+              📱 Share this product
+            </h3>
+            <QRCodeDisplay url={window.location.href} />
+            <p style={{ fontSize: '0.85rem', color: '#888', marginTop: '0.5rem' }}>
+              Scan to share with friends
+            </p>
+          </div>
 
           <Link
             to="/shop"
