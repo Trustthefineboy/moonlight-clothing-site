@@ -77,25 +77,6 @@ export default function Shop() {
           "Each Moonlight fabric carries a story, a covenant of creativity. Choose yours — wear your light."
         </p>
       </div>
-        borderBottom: '3px solid #FFD700',
-        paddingBottom: '1rem'
-      }}>
-        <h1 style={{ 
-          fontSize: '2.5rem', 
-          color: '#222',
-          margin: 0,
-          marginBottom: '0.5rem'
-        }}>
-          🛍️ Shop Our Collection
-        </h1>
-        <p style={{ 
-          color: '#666', 
-          fontSize: '1.1rem',
-          margin: 0
-        }}>
-          Discover unique African-inspired fashion
-        </p>
-      </div>
 
       {/* Search Bar */}
       <div style={{ marginBottom: '1.5rem' }}>
