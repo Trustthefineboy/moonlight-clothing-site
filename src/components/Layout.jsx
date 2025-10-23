@@ -62,7 +62,7 @@ export default function Layout({ children }) {
           <img 
             src="/images/moonlight-logo.png" 
             alt="Moonlight Clothings" 
-            style={{ height: isMobile ? '40px' : '50px', width: 'auto' }}
+            style={{ height: isMobile ? '32px' : '50px', width: 'auto' }}
           />
         </Link>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>

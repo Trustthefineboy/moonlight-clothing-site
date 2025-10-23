@@ -147,7 +147,7 @@ export default function Home() {
             src="/images/moonlight-logo.png"
             alt="Moonlight Clothings Logo"
             style={{
-              width: 'min(220px, 70vw)',
+              width: 'min(180px, 50vw)',
               marginBottom: '1.5rem',
               boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
             }}
