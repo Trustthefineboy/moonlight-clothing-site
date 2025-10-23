@@ -4,18 +4,25 @@ import { useWishlist } from './WishlistContext';
 import { useCart } from './CartContext';
 import ScrollToTop from './ScrollToTop';
 
-const navLinks = [
+// Primary navigation links (always visible)
+const primaryLinks = [
   { to: '/', label: 'Home' },
   { to: '/shop', label: 'Shop' },
   { to: '/nft-gallery', label: '✨ NFT Vault' },
   { to: '/gallery', label: 'Gallery' },
+];
+
+// Secondary links (hidden in "More" dropdown)
+const secondaryLinks = [
   { to: '/memories', label: '📸 Memories' },
   { to: '/reviews', label: 'Reviews' },
   { to: '/about', label: 'About' },
+  { to: '/orders', label: '📦 Orders' },
+  { to: '/profile', label: '👤 Account' },
 ];
 
 export default function Layout({ children }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
   const { wishlistCount } = useWishlist();
   const { cart } = useCart();
 
@@ -36,9 +43,11 @@ export default function Layout({ children }) {
       <nav
         style={{
           width: '100%',
+          maxWidth: '1400px',
+          margin: '0 auto',
           background: '#fff',
           borderBottom: '1px solid #e0eafc',
-          padding: 'clamp(0.5rem, 1vw, 1rem) clamp(0.75rem, 2vw, 1.5rem)',
+          padding: 'clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 3vw, 2.5rem)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -46,40 +55,38 @@ export default function Layout({ children }) {
           position: 'sticky',
           top: 0,
           zIndex: 1000,
-          gap: 'clamp(0.5rem, 1vw, 1rem)',
-          overflowX: 'auto'
+          gap: 'clamp(1rem, 2vw, 2rem)'
         }}
       >
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+        <Link to="/" style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          textDecoration: 'none', 
+          flexShrink: 0,
+          marginRight: 'clamp(1rem, 2vw, 2rem)'
+        }}>
           <img 
             src="/images/moonlight-logo.png" 
             alt="Moonlight Clothings" 
             style={{ 
-              height: 'clamp(32px, 5vw, 50px)', 
+              height: 'clamp(45px, 7vw, 65px)', 
               width: 'auto',
-              objectFit: 'contain'
+              objectFit: 'contain',
+              borderRadius: '8px',
+              padding: '4px'
             }}
           />
         </Link>
         
-        {/* All Navigation - Always visible, scrollable on small screens */}
+        {/* Primary Navigation Links */}
         <div style={{ 
           display: 'flex', 
-          gap: 'clamp(0.5rem, 1.5vw, 1.5rem)', 
+          gap: 'clamp(1rem, 2vw, 2rem)', 
           alignItems: 'center',
-          flexWrap: 'nowrap',
-          overflowX: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+          flex: 1,
+          justifyContent: 'center'
         }}>
-          <style>{`
-            nav > div::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-          
-          {navLinks.map(link => (
+          {primaryLinks.map(link => (
             <Link
               key={link.to}
               to={link.to}
@@ -88,9 +95,8 @@ export default function Layout({ children }) {
                 textDecoration: 'none',
                 fontWeight: 'bold',
                 transition: 'color 0.3s',
-                fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
-                whiteSpace: 'nowrap',
-                flexShrink: 0
+                fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)',
+                whiteSpace: 'nowrap'
               }}
               onMouseEnter={(e) => e.target.style.color = '#4169E1'}
               onMouseLeave={(e) => e.target.style.color = '#1976d2'}
@@ -99,47 +105,72 @@ export default function Layout({ children }) {
             </Link>
           ))}
           
-          {/* Orders Link */}
-          <Link
-            to="/orders"
-            style={{
-              color: '#1976d2',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.3rem',
-              transition: 'color 0.3s',
-              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
-              whiteSpace: 'nowrap',
-              flexShrink: 0
-            }}
-            onMouseEnter={(e) => e.target.style.color = '#4169E1'}
-            onMouseLeave={(e) => e.target.style.color = '#1976d2'}
-          >
-            📦 Orders
-          </Link>
-          
-          {/* Profile Link */}
-          <Link
-            to="/profile"
-            style={{
-              color: '#1976d2',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.3rem',
-              transition: 'color 0.3s',
-              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
-              whiteSpace: 'nowrap',
-              flexShrink: 0
-            }}
-            onMouseEnter={(e) => e.target.style.color = '#4169E1'}
-            onMouseLeave={(e) => e.target.style.color = '#1976d2'}
-          >
-            👤 Account
-          </Link>
+          {/* More Dropdown */}
+          <div style={{ position: 'relative' }}>
+            <button
+              onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+              style={{
+                color: '#1976d2',
+                background: 'none',
+                border: 'none',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                padding: '0.5rem',
+                transition: 'color 0.3s'
+              }}
+              onMouseEnter={(e) => e.target.style.color = '#4169E1'}
+              onMouseLeave={(e) => e.target.style.color = '#1976d2'}
+            >
+              ⋯ More
+            </button>
+            
+            {moreMenuOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                marginTop: '0.5rem',
+                background: 'white',
+                borderRadius: '8px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                minWidth: '180px',
+                overflow: 'hidden',
+                zIndex: 2000
+              }}>
+                {secondaryLinks.map(link => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setMoreMenuOpen(false)}
+                    style={{
+                      display: 'block',
+                      padding: '0.875rem 1.25rem',
+                      color: '#1976d2',
+                      textDecoration: 'none',
+                      fontWeight: '600',
+                      borderBottom: '1px solid #f0f0f0',
+                      transition: 'background 0.2s',
+                      fontSize: '0.95rem'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = '#f5f7fa';
+                      e.target.style.color = '#4169E1';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'white';
+                      e.target.style.color = '#1976d2';
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
           
           {/* Wishlist Link with Badge */}
           <Link
