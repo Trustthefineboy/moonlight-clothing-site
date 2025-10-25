@@ -5,6 +5,7 @@ import { useWishlist } from '../components/WishlistContext';
 import ImageZoomModal from '../components/ImageZoomModal';
 import QRCodeDisplay from '../components/QRCodeDisplay';
 import { productsData } from '../data/productsData';
+import { assetSrc } from '../utils/paths';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -117,7 +118,7 @@ export default function ProductDetail() {
             onClick={() => setShowZoom(true)}
           >
             <img
-              src={product.image}
+              src={assetSrc(product.image)}
               alt={product.name}
               style={{
                 width: '100%',
@@ -492,7 +493,7 @@ export default function ProductDetail() {
                     backgroundColor: '#f5f5f5'
                   }}>
                     <img
-                      src={relatedProduct.image}
+                      src={assetSrc(relatedProduct.image)}
                       alt={relatedProduct.name}
                       style={{
                         width: '100%',
@@ -541,7 +542,7 @@ export default function ProductDetail() {
       {/* Image Zoom Modal */}
       {showZoom && (
         <ImageZoomModal
-          imageUrl={product.image}
+          imageUrl={assetSrc(product.image)}
           imageName={product.name}
           onClose={() => setShowZoom(false)}
         />

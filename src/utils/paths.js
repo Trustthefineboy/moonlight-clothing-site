@@ -5,3 +5,10 @@ export const getAssetPath = (path) => {
   // Use Vite's BASE_URL which handles the base path automatically
   return `${import.meta.env.BASE_URL}${cleanPath}`;
 };
+
+// For use in JSX - wraps image src
+export const assetSrc = (src) => {
+  if (!src) return '';
+  if (src.startsWith('http') || src.startsWith('data:')) return src;
+  return getAssetPath(src);
+};

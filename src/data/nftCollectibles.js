@@ -1,5 +1,3 @@
-import { getAssetPath } from '../utils/paths';
-
 // NFT Collectibles Data - Moonlight Digital Archive
 // Using REAL Moonlight product images
 
@@ -527,4 +525,3 @@ export const rarityLevels = {
     multiplier: 3
   }
 };
-
