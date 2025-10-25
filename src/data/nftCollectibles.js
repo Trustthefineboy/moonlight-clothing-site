@@ -12,9 +12,9 @@ export const nftCollectibles = [
     edition: 'Limited 10',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081215.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081215.png',
-    price: 1600000,
+    imageUrl: '/images/imagex1.jpg',
+    thumbnailUrl: '/images/imagex1.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Ancient Yoruba Kingdom',
@@ -34,9 +34,9 @@ export const nftCollectibles = [
     edition: 'Limited 20',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081234.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081234.png',
-    price: 1100000,
+    imageUrl: '/images/imagex2.jpg',
+    thumbnailUrl: '/images/imagex2.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Ancient to Modern',
@@ -56,9 +56,9 @@ export const nftCollectibles = [
     edition: '1 of 1',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081302.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081302.png',
-    price: 3000000,
+    imageUrl: '/images/imagex3.jpg',
+    thumbnailUrl: '/images/imagex3.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: '3100 BCE',
@@ -78,9 +78,9 @@ export const nftCollectibles = [
     edition: '1 of 1',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081321.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081321.png',
-    price: 4000000,
+    imageUrl: '/images/imagex4.jpg',
+    thumbnailUrl: '/images/imagex4.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: '1312-1337 CE',
@@ -100,9 +100,9 @@ export const nftCollectibles = [
     edition: 'Limited 15',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081340.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081340.png',
-    price: 1300000,
+    imageUrl: '/images/imagex5.jpg',
+    thumbnailUrl: '/images/imagex5.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Traditional to Contemporary',
@@ -122,9 +122,9 @@ export const nftCollectibles = [
     edition: 'Limited 12',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 080946.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 080946.png',
-    price: 1500000,
+    imageUrl: '/images/imagex6.jpg',
+    thumbnailUrl: '/images/imagex6.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Contemporary Heritage',
@@ -144,9 +144,9 @@ export const nftCollectibles = [
     edition: 'Limited 25',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081133.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081133.png',
-    price: 1000000,
+    imageUrl: '/images/imagex7.jpg',
+    thumbnailUrl: '/images/imagex7.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Timeless',
@@ -166,9 +166,9 @@ export const nftCollectibles = [
     edition: 'Limited 30',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081153.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081153.png',
-    price: 900000,
+    imageUrl: '/images/imagex8.jpg',
+    thumbnailUrl: '/images/imagex8.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Eternal Nature',
@@ -188,9 +188,9 @@ export const nftCollectibles = [
     edition: 'Limited 40',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081541.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081541.png',
-    price: 800000,
+    imageUrl: '/images/imagex9.jpg',
+    thumbnailUrl: '/images/imagex9.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Timeless',
@@ -210,9 +210,9 @@ export const nftCollectibles = [
     edition: 'Limited 8',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081602.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081602.png',
-    price: 1800000,
+    imageUrl: '/images/imagex10.jpg',
+    thumbnailUrl: '/images/imagex10.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Ancient to Eternal',
@@ -232,9 +232,9 @@ export const nftCollectibles = [
     edition: 'Limited 10',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081404.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081404.png',
-    price: 1700000,
+    imageUrl: '/images/imagex11.jpg',
+    thumbnailUrl: '/images/imagex11.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Ancestral Timeless',
@@ -254,9 +254,9 @@ export const nftCollectibles = [
     edition: 'Limited 25',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081429.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081429.png',
-    price: 1200000,
+    imageUrl: '/images/imagex12.jpg',
+    thumbnailUrl: '/images/imagex12.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Transcendent',
@@ -276,9 +276,9 @@ export const nftCollectibles = [
     edition: 'Limited 7',
     mintDate: null,
     blockchain: 'Ethereum',
-    imageUrl: '/images/Screenshot 2025-10-16 081516.png',
-    thumbnailUrl: '/images/Screenshot 2025-10-16 081516.png',
-    price: 1900000,
+    imageUrl: '/images/imagex13.jpg',
+    thumbnailUrl: '/images/imagex13.jpg',
+    price: null,
     status: 'available',
     attributes: {
       era: 'Ancient Covenant',
@@ -286,6 +286,160 @@ export const nftCollectibles = [
       significance: 'Sacred Vows & Promises',
       colors: ['Deep Black', 'Sacred Gold'],
       garmentType: 'Covenant Set'
+    }
+  },
+  {
+    id: 'nft-014',
+    name: 'Ancestral Throne - Royal Heritage',
+    collection: 'Sacred Rulers Collection',
+    story: 'The throne is not just a seat of power - it is a sacred connection to all who came before. This majestic design honors the royal lineages of Africa, from ancient dynasties to modern kingdoms. Each pattern represents a generation, each symbol a ruler who shaped destiny. The ancestral throne reminds us that leadership is inherited responsibility, carried with honor and wisdom.',
+    symbolism: 'Royal Lineage, Heritage, Leadership, Ancestral Wisdom',
+    rarity: 'Epic',
+    edition: 'Limited 15',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex14.jpg',
+    thumbnailUrl: '/images/imagex14.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Ancient Dynasties',
+      culture: 'Pan-African Royalty',
+      significance: 'Royal Succession & Power',
+      colors: ['Royal Purple', 'Gold', 'Crimson'],
+      garmentType: 'Throne Set'
+    }
+  },
+  {
+    id: 'nft-015',
+    name: 'Ocean Spirits - Mami Wata',
+    collection: 'Nature\'s Symphony Collection',
+    story: 'Mami Wata, the powerful water deity revered across Africa and the diaspora. She brings wealth, beauty, and spiritual gifts to those who honor her. This flowing design captures the essence of ocean waves, mermaid spirits, and the mysterious depths where divine feminine power resides. Turquoise waters meet golden shores in a dance of prosperity and mysticism.',
+    symbolism: 'Divine Feminine, Water Spirits, Prosperity, Mystery',
+    rarity: 'Rare',
+    edition: 'Limited 20',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex15.jpg',
+    thumbnailUrl: '/images/imagex15.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Timeless Mythology',
+      culture: 'West African/Caribbean',
+      significance: 'Water Deity & Abundance',
+      colors: ['Turquoise', 'Ocean Blue', 'Pearl White'],
+      garmentType: 'Oceanic Flow Set'
+    }
+  },
+  {
+    id: 'nft-016',
+    name: 'Warrior\'s Code - Zulu Legacy',
+    collection: 'Sacred Guardians Collection',
+    story: 'The Zulu warriors stand as one of history\'s most formidable fighting forces. This powerful design honors the warrior\'s code - courage, discipline, unity, and unwavering loyalty to the kingdom. Bold patterns of shields and spears tell stories of battles won not just with strength, but with strategic brilliance. Wear this to embody the warrior spirit that never surrenders.',
+    symbolism: 'Courage, Strategy, Unity, Warrior Honor',
+    rarity: 'Epic',
+    edition: 'Limited 12',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex16.jpg',
+    thumbnailUrl: '/images/imagex16.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Zulu Kingdom Era',
+      culture: 'South African Zulu',
+      significance: 'Warrior Excellence',
+      colors: ['Battle Red', 'Shield Black', 'Spear Silver'],
+      garmentType: 'Warrior Armor'
+    }
+  },
+  {
+    id: 'nft-017',
+    name: 'Sahara Whispers - Desert Mysteries',
+    collection: 'Sacred Wisdom Collection',
+    story: 'The Sahara Desert holds secrets older than civilization itself. This mystical design captures the whispers of desert winds carrying ancient knowledge across endless dunes. Golden sands meet deep night skies, where Tuareg nomads navigate by stars and oral histories pass through generations. In the silence of the desert, truth speaks loudest.',
+    symbolism: 'Ancient Knowledge, Navigation, Endurance, Desert Wisdom',
+    rarity: 'Rare',
+    edition: 'Limited 25',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex17.jpg',
+    thumbnailUrl: '/images/imagex17.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Timeless Desert',
+      culture: 'Saharan/Tuareg',
+      significance: 'Navigation & Survival',
+      colors: ['Desert Gold', 'Sand Beige', 'Night Blue'],
+      garmentType: 'Nomad Journey Set'
+    }
+  },
+  {
+    id: 'nft-018',
+    name: 'Harvest Moon - Abundance Ritual',
+    collection: 'Celestial Stories Collection',
+    story: 'When the harvest moon rises full and bright, communities gather to celebrate abundance and give thanks to the earth. This radiant design honors agricultural traditions, moon ceremonies, and the sacred relationship between humanity and nature. Orange harvest hues blend with lunar silver, representing the perfect balance between work and celebration.',
+    symbolism: 'Abundance, Gratitude, Community, Agricultural Wisdom',
+    rarity: 'Rare',
+    edition: 'Limited 18',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex18.jpg',
+    thumbnailUrl: '/images/imagex18.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Agricultural Traditions',
+      culture: 'Pan-African Farming',
+      significance: 'Harvest Celebration',
+      colors: ['Harvest Orange', 'Moon Silver', 'Earth Brown'],
+      garmentType: 'Celebration Set'
+    }
+  },
+  {
+    id: 'nft-019',
+    name: 'Kente Majesty - Ashanti Pride',
+    collection: 'Traditional Crafts Collection',
+    story: 'Kente cloth, the fabric of kings and queens, woven with precision and purpose by master Ashanti craftspeople. Each color has meaning, each pattern tells a story, each strip represents a proverb. This magnificent design celebrates the art of Kente weaving - a craft so revered that it became the symbol of African excellence worldwide. Wear majesty, wear history, wear Kente.',
+    symbolism: 'Royalty, Craftsmanship, Cultural Pride, Excellence',
+    rarity: 'Legendary',
+    edition: 'Limited 5',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex19.jpg',
+    thumbnailUrl: '/images/imagex19.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Ashanti Empire',
+      culture: 'Ghanaian/Ashanti',
+      significance: 'Royal Weaving Tradition',
+      colors: ['Royal Gold', 'Kente Green', 'Sacred Red', 'Royal Blue'],
+      garmentType: 'Kente Royalty'
+    }
+  },
+  {
+    id: 'nft-020',
+    name: 'Future Ancestors - Legacy Vision',
+    collection: 'Modern Kingdoms Collection',
+    story: 'We are the ancestors our descendants will honor. This visionary design bridges past, present, and future - acknowledging that today\'s actions become tomorrow\'s history. Futuristic patterns meet traditional symbols, representing Africa\'s technological advancement while honoring ancestral wisdom. We are writing the stories that will be told for generations. We are the future ancestors.',
+    symbolism: 'Legacy, Vision, Progress, Ancestral Future',
+    rarity: 'Epic',
+    edition: 'Limited 10',
+    mintDate: null,
+    blockchain: 'Ethereum',
+    imageUrl: '/images/imagex20.jpg',
+    thumbnailUrl: '/images/imagex20.jpg',
+    price: null,
+    status: 'available',
+    attributes: {
+      era: 'Contemporary & Beyond',
+      culture: 'Pan-African Future',
+      significance: 'Legacy Building',
+      colors: ['Future Silver', 'Tech Gold', 'Heritage Black'],
+      garmentType: 'Vision Set'
     }
   }
 ];
@@ -296,7 +450,7 @@ export const nftCollections = [
     id: 'sacred-rulers',
     name: 'Sacred Rulers Collection',
     description: 'Legendary African kings and queens who shaped history',
-    count: 2
+    count: 3
   },
   {
     id: 'sacred-kingdoms',
@@ -308,37 +462,37 @@ export const nftCollections = [
     id: 'celestial-stories',
     name: 'Celestial Stories Collection',
     description: 'Moon, sun, and stars in African cosmology',
-    count: 2
+    count: 3
   },
   {
     id: 'natures-symphony',
     name: 'Nature\'s Symphony Collection',
     description: 'Birds, oceans, and natural harmony',
-    count: 1
+    count: 2
   },
   {
     id: 'traditional-crafts',
     name: 'Traditional Crafts Collection',
     description: 'Ancient textile arts and techniques',
-    count: 2
+    count: 3
   },
   {
     id: 'modern-kingdoms',
     name: 'Modern Kingdoms Collection',
     description: 'Contemporary African nations and their heritage',
-    count: 1
+    count: 2
   },
   {
     id: 'sacred-wisdom',
     name: 'Sacred Wisdom Collection',
     description: 'Meditation, inner peace, and spiritual knowledge',
-    count: 2
+    count: 3
   },
   {
     id: 'sacred-guardians',
     name: 'Sacred Guardians Collection',
     description: 'Protectors, warriors, and ancestral defenders',
-    count: 1
+    count: 2
   },
   {
     id: 'sacred-symbols',

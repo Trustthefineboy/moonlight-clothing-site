@@ -10,6 +10,7 @@ const primaryLinks = [
   { to: '/shop', label: 'Shop' },
   { to: '/nft-gallery', label: '✨ NFT Vault' },
   { to: '/gallery', label: 'Gallery' },
+  { to: '/profile', label: '👤 Account' },
 ];
 
 // Secondary links (hidden in "More" dropdown)
@@ -18,7 +19,6 @@ const secondaryLinks = [
   { to: '/reviews', label: 'Reviews' },
   { to: '/about', label: 'About' },
   { to: '/orders', label: '📦 Orders' },
-  { to: '/profile', label: '👤 Account' },
 ];
 
 export default function Layout({ children }) {

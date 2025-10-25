@@ -276,23 +276,19 @@ export default function NFTDetail() {
               marginBottom: '2rem'
             }}>
               <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
                 marginBottom: '1.5rem'
               }}>
-                <div>
-                  <div style={{ fontSize: '0.875rem', color: '#9ca3af' }}>Current Price</div>
-                  <div style={{
-                    fontSize: '2rem',
-                    fontWeight: 'bold',
-                    color: '#f59e0b'
-                  }}>
-                    ₦{nft.price.toLocaleString()}
-                  </div>
-                  <div style={{ fontSize: '0.875rem', color: '#9ca3af' }}>
-                    Premium Digital Collectible
-                  </div>
+                <div style={{ fontSize: '0.875rem', color: '#9ca3af' }}>Digital Collectible</div>
+                <div style={{
+                  fontSize: '1.5rem',
+                  fontWeight: 'bold',
+                  color: '#f59e0b',
+                  marginTop: '0.5rem'
+                }}>
+                  Premium NFT Artwork
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#9ca3af', marginTop: '0.5rem' }}>
+                  Exclusive Digital Heritage
                 </div>
               </div>
 

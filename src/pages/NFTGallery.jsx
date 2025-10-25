@@ -322,29 +322,14 @@ function NFTCard({ nft }) {
             {nft.story}
           </p>
 
-          {/* Edition & Price */}
+          {/* Edition */}
           <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
             paddingTop: '1rem',
             borderTop: '1px solid rgba(255, 255, 255, 0.1)'
           }}>
-            <div>
-              <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>Edition</div>
-              <div style={{ fontSize: '0.9rem', color: '#f5f5f5', fontWeight: 'bold' }}>
-                {nft.edition}
-              </div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>Price</div>
-              <div style={{
-                fontSize: '1.1rem',
-                color: '#f59e0b',
-                fontWeight: 'bold'
-              }}>
-                ₦{nft.price.toLocaleString()}
-              </div>
+            <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>Edition</div>
+            <div style={{ fontSize: '0.9rem', color: '#f5f5f5', fontWeight: 'bold' }}>
+              {nft.edition}
             </div>
           </div>
         </div>
