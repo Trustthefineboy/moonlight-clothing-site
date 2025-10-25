@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { nftCollectibles, nftCollections, rarityLevels } from '../data/nftCollectibles';
+import { assetSrc } from '../utils/paths';
 
 export default function NFTGallery() {
   const [selectedCollection, setSelectedCollection] = useState('all');
@@ -285,7 +286,7 @@ function NFTCard({ nft }) {
             </div>
           )}
 
-          <img src={nft.imageUrl} alt={nft.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={assetSrc(nft.imageUrl)} alt={nft.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           {/* <img src={nft.thumbnailUrl} alt={nft.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
         </div>
 

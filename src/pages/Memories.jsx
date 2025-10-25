@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { memoriesData } from '../data/memoriesData';
+import { assetSrc } from '../utils/paths';
 
 export default function Memories() {
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -169,7 +170,7 @@ export default function Memories() {
                 }}>
                   {memory.type === 'image' ? (
                     <img
-                      src={memory.src}
+                      src={assetSrc(memory.src)}
                       alt={memory.title}
                       style={{
                         width: '100%',
@@ -187,7 +188,7 @@ export default function Memories() {
                       position: 'relative'
                     }}>
                       <video
-                        src={memory.src}
+                        src={assetSrc(memory.src)}
                         style={{
                           width: '100%',
                           height: '100%',
@@ -322,7 +323,7 @@ export default function Memories() {
           >
             {selectedMedia.type === 'image' ? (
               <img
-                src={selectedMedia.src}
+                src={assetSrc(selectedMedia.src)}
                 alt={selectedMedia.title}
                 style={{
                   maxWidth: '100%',
@@ -334,7 +335,7 @@ export default function Memories() {
               />
             ) : (
               <video
-                src={selectedMedia.src}
+                src={assetSrc(selectedMedia.src)}
                 controls
                 autoPlay
                 style={{

@@ -6,6 +6,7 @@ import { useToast } from './ToastContext';
 import ProductSkeleton from './ProductSkeleton';
 import QuickViewModal from './QuickViewModal';
 import { productsData } from '../data/productsData';
+import { assetSrc } from '../utils/paths';
 
 export default function FabricList({ filter = {} }) {
   const [fabrics, setFabrics] = useState([]);
@@ -226,7 +227,7 @@ export default function FabricList({ filter = {} }) {
               position: 'relative'
             }}>
               <img
-                src={fabric.image}
+                src={assetSrc(fabric.image)}
                 alt={fabric.name}
                 style={{
                   width: '100%',

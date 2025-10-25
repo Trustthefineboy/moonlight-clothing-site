@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { nftCollectibles, rarityLevels } from '../data/nftCollectibles';
 import { useToast } from '../components/ToastContext';
+import { assetSrc } from '../utils/paths';
 
 export default function NFTDetail() {
   const { nftId } = useParams();
@@ -87,8 +88,8 @@ export default function NFTDetail() {
               boxShadow: `0 20px 60px ${rarityColor}40`,
               marginBottom: '1.5rem'
             }}>
-              <img src={nft.imageUrl} alt={nft.name} style={{ width: '100%', height: window.innerWidth < 768 ? '300px' : '500px', objectFit: 'cover' }} />
-              {/* Replace with: <img src={nft.imageUrl} alt={nft.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
+              <img src={assetSrc(nft.imageUrl)} alt={nft.name} style={{ width: '100%', height: window.innerWidth < 768 ? '300px' : '500px', objectFit: 'cover' }} />
+              {/* Replace with: <img src={assetSrc(nft.imageUrl)} alt={nft.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
             </div>
 
             {/* Attributes Grid */}
