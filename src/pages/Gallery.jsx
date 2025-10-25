@@ -5,7 +5,7 @@ const mediaItems = [
   {
     id: 1,
     type: 'image',
-    src: '/images/the-convenant-of-symbols.jpg',
+    src: getAssetPath('/images/the-convenant-of-symbols.jpg',
     title: 'The Covenant of Symbols – Fabric Design',
     description: 'Every symbol on this sacred Moonlight fabric tells a silent story — one written long before ink, drawn by divine geometry, and reborn through the hands of a modern craftsman. Dyed in deep indigo with sacred ivory lines and golden inscriptions, this piece stands as a covenant between ancestry and creation.',
     category: 'designs'
@@ -13,7 +13,7 @@ const mediaItems = [
   {
     id: 2,
     type: 'image',
-    src: '/images/covenant-white-shirt.jpg',
+    src: getAssetPath('/images/covenant-white-shirt.jpg',
     title: 'Covenant Symbols – White Long Sleeve Shirt',
     description: 'The sacred symbols crafted into an elegant white long-sleeve shirt with contrasting golden covenant patterns on black panels. Perfect blend of tradition and contemporary fashion.',
     category: 'products'
@@ -21,7 +21,7 @@ const mediaItems = [
   {
     id: 3,
     type: 'image',
-    src: '/images/covenant-black-shirt.jpg',
+    src: getAssetPath('/images/covenant-black-shirt.jpg',
     title: 'Covenant Symbols – Black Short Sleeve Shirt',
     description: 'Bold statement piece featuring the covenant symbols in golden embroidery on deep black fabric. Modern fit with traditional spiritual significance.',
     category: 'products'
@@ -29,7 +29,7 @@ const mediaItems = [
   {
     id: 4,
     type: 'image',
-    src: '/images/covenant-black-pants.jpg',
+    src: getAssetPath('/images/covenant-black-pants.jpg',
     title: 'Covenant Symbols – Black Trousers',
     description: 'Sophisticated black trousers adorned with covenant symbols along the legs. Where ceremony meets everyday style.',
     category: 'products'
@@ -37,7 +37,7 @@ const mediaItems = [
   {
     id: 5,
     type: 'image',
-    src: '/images/covenant-black-jacket.jpg',
+    src: getAssetPath('/images/covenant-black-jacket.jpg',
     title: 'Covenant Symbols – Black Jacket',
     description: 'Premium black jacket featuring sacred symbols strategically placed across the design. Modern tailoring with ancestral wisdom.',
     category: 'products'
@@ -45,7 +45,7 @@ const mediaItems = [
   {
     id: 6,
     type: 'image',
-    src: '/images/covenant-blue-jeans.jpg',
+    src: getAssetPath('/images/covenant-blue-jeans.jpg',
     title: 'Covenant Symbols – Denim Collection',
     description: 'Sacred symbols meet street style. Premium denim featuring golden covenant patterns with chains and modern detailing.',
     category: 'products'
@@ -53,7 +53,7 @@ const mediaItems = [
   {
     id: 7,
     type: 'image',
-    src: '/images/covenant-blue-set.jpg',
+    src: getAssetPath('/images/covenant-blue-set.jpg',
     title: 'Covenant Symbols – Denim Two-Piece Set',
     description: 'Complete denim outfit featuring jacket and shorts with covenant symbols. Urban fashion rooted in spiritual heritage.',
     category: 'products'
@@ -61,7 +61,7 @@ const mediaItems = [
   {
     id: 8,
     type: 'image',
-    src: '/images/covenant-black-kaftan.jpg',
+    src: getAssetPath('/images/covenant-black-kaftan.jpg',
     title: 'Covenant Symbols – Traditional Kaftan',
     description: 'Majestic black kaftan with golden covenant symbols on the shoulders and neckline. Traditional African wear elevated with divine geometry.',
     category: 'products'
@@ -69,7 +69,7 @@ const mediaItems = [
   {
     id: 9,
     type: 'image',
-    src: '/images/covenant-black-joggers.jpg',
+    src: getAssetPath('/images/covenant-black-joggers.jpg',
     title: 'Covenant Symbols – Joggers Set',
     description: 'Contemporary streetwear featuring covenant symbols. Comfortable joggers with matching details that carry spiritual meaning.',
     category: 'products'
@@ -77,7 +77,7 @@ const mediaItems = [
   {
     id: 10,
     type: 'image',
-    src: '/images/gangan-denim.jpg',
+    src: getAssetPath('/images/gangan-denim.jpg',
     title: 'GANGAN DENIM – The Drum That Speaks',
     description: 'Every tribe has a voice. Every culture has a rhythm. And in the spirit of Moonlight, this fabric sings that rhythm into being. Inspired by the ancient talking drum — "Gangan", the Yoruba drum that communicates emotion, wisdom, and community.',
     category: 'designs'
@@ -85,7 +85,7 @@ const mediaItems = [
   {
     id: 11,
     type: 'image',
-    src: '/images/bridge-between-worlds.jpg',
+    src: getAssetPath('/images/bridge-between-worlds.jpg',
     title: 'The Bridge Between Worlds – Fabric of Balance',
     description: 'In the language of the ancestors, every line is a journey and every wave is a whisper. This fabric, dyed in deep indigo and sacred ochre, represents the bridge between two worlds — the seen and the unseen. The crossed paths symbolize earthly order while flowing waves remind us of divine rhythm.',
     category: 'designs'
@@ -93,7 +93,7 @@ const mediaItems = [
   {
     id: 12,
     type: 'image',
-    src: '/images/guardian-of-earth.jpg',
+    src: getAssetPath('/images/guardian-of-earth.jpg',
     title: 'The Guardian of the Earth',
     description: 'This fabric is a spiritual homage to the ancient guardians of African wisdom — the keepers of balance between earth and spirit. The central face represents the ancestral watcher, whose eyes are closed not in blindness but in deep knowing. Around it are coded Adinkra-style symbols: Waves and spirals – the flow of divine knowledge and endless evolution.',
     category: 'designs'
@@ -431,3 +431,4 @@ export default function Gallery() {
     </div>
   );
 }
+

@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useToast } from '../components/ToastContext';
+import { getAssetPath } from '../utils/paths';
 
 // Featured collections for the homepage
 const featuredCollections = [
   {
     id: 1,
     name: 'The Sacred Fabrics',
-    image: '/images/sacred-fabrics-featured.jpg',
+    image: getAssetPath('/images/sacred-fabrics-featured.jpg'),
     description: 'Our premium handcrafted fabrics with deep cultural significance',
     link: '/fabric'
   },
   {
     id: 2,
     name: 'The Ready-to-Wear Realm',
-    image: '/images/ready-to-wear-featured.jpg',
+    image: getAssetPath('/images/ready-to-wear-featured.jpg'),
     description: 'Elegant, practical designs for your everyday moments',
     link: '/shop'
   },
   {
     id: 3,
     name: 'Limited Drop Series',
-    image: '/images/limited-drop-featured.jpg',
+    image: getAssetPath('/images/limited-drop-featured.jpg'),
     description: 'Exclusive designs available for a limited time only',
     link: '/shop'
   }
@@ -144,7 +145,7 @@ export default function Home() {
       >
         <div style={{ maxWidth: '800px', zIndex: 1, padding: '0 1rem' }}>
           <img
-            src="/images/moonlight-logo.png"
+            src={getAssetPath('/images/moonlight-logo.png')}
             alt="Moonlight Clothings Logo"
             style={{
               width: 'min(180px, 50vw)',

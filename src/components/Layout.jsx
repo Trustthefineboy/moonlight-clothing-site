@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useWishlist } from './WishlistContext';
 import { useCart } from './CartContext';
 import ScrollToTop from './ScrollToTop';
+import { getAssetPath } from '../utils/paths';
 
 // Primary navigation links (always visible)
 const primaryLinks = [
@@ -75,7 +76,7 @@ export default function Layout({ children }) {
           marginRight: isMobile ? '0' : 'clamp(1rem, 2vw, 2rem)'
         }}>
           <img 
-            src="/images/moonlight-logo.png" 
+            src={getAssetPath('/images/moonlight-logo.png')}
             alt="Moonlight Clothings" 
             style={{ 
               height: isMobile ? '48px' : 'clamp(45px, 7vw, 65px)', 
