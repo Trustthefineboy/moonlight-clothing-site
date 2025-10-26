@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
 import { useOrders } from '../components/OrderContext';
 import { useToast } from '../components/ToastContext';
+import { assetSrc } from '../utils/paths';
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
@@ -140,7 +141,7 @@ export default function Cart() {
               {/* Product image */}
               <div>
                 <img 
-                  src={item.image || 'https://via.placeholder.com/100x120?text=No+Image'} 
+                  src={assetSrc(item.image) || 'https://via.placeholder.com/100x120?text=No+Image'} 
                   alt={item.name}
                   style={{ 
                     width: '100%', 

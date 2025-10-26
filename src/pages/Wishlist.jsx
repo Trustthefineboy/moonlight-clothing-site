@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useWishlist } from '../components/WishlistContext';
 import { useCart } from '../components/CartContext';
 import { useToast } from '../components/ToastContext';
+import { assetSrc } from '../utils/paths';
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
@@ -174,7 +175,7 @@ export default function Wishlist() {
                 backgroundColor: '#f5f5f5'
               }}>
                 <img
-                  src={item.image}
+                  src={assetSrc(item.image)}
                   alt={item.name}
                   style={{
                     width: '100%',
