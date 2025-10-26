@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import { useWishlist } from './WishlistContext';
 import { useToast } from './ToastContext';
+import { assetSrc } from '../utils/paths';
 
 export default function QuickViewModal({ product, onClose }) {
   const [selectedSize, setSelectedSize] = useState('');
@@ -111,7 +112,7 @@ export default function QuickViewModal({ product, onClose }) {
             minHeight: '400px'
           }}>
             <img
-              src={product.image}
+              src={assetSrc(product.image)}
               alt={product.name}
               style={{
                 width: '100%',
