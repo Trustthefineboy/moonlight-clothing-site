@@ -247,9 +247,9 @@ export default function Home() {
             gap: isMobile ? '2rem' : '2.5rem'
           }}>
             {[
-              { name: 'THE SACRED FABRICS', link: '/fabric', desc: 'Premium handcrafted fabrics with deep cultural significance' },
-              { name: 'READY-TO-WEAR', link: '/shop', desc: 'Elegant, practical designs for your everyday moments' },
-              { name: 'LIMITED DROPS', link: '/shop', desc: 'Exclusive designs available for a limited time only' }
+              { name: 'THE SACRED FABRICS', link: '/fabric', desc: 'Premium handcrafted fabrics with deep cultural significance', image: 'sacred-fabrics-featured.jpg' },
+              { name: 'READY-TO-WEAR', link: '/shop', desc: 'Elegant, practical designs for your everyday moments', image: 'ready-to-wear-featured.jpg' },
+              { name: 'LIMITED DROPS', link: '/shop', desc: 'Exclusive designs available for a limited time only', image: 'limited-drop-featured.jpg' }
             ].map((collection, index) => (
               <Link
                 key={index}
@@ -270,7 +270,9 @@ export default function Home() {
                 >
                   <div style={{
                     height: isMobile ? '250px' : '350px',
-                    background: '#e5e5e5',
+                    backgroundImage: `url(${assetSrc(`/images/${collection.image}`)})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     marginBottom: '1.5rem'
                   }}></div>
                   
