@@ -24,6 +24,7 @@ const secondaryLinks = [
 
 export default function Layout({ children }) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { wishlistCount } = useWishlist();
   const { cart } = useCart();
   const [isMobile, setIsMobile] = useState(false);
@@ -34,6 +35,17 @@ export default function Layout({ children }) {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Close mobile menu when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (mobileMenuOpen && !e.target.closest('.mobile-menu') && !e.target.closest('.hamburger-btn')) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [mobileMenuOpen]);
 
   return (
     <div
@@ -56,7 +68,7 @@ export default function Layout({ children }) {
           margin: '0 auto',
           background: '#fff',
           borderBottom: '1px solid #e0eafc',
-          padding: isMobile ? '1rem 1.25rem' : 'clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 3vw, 2.5rem)',
+          padding: isMobile ? '0.75rem 1rem' : 'clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 3vw, 2.5rem)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -65,7 +77,7 @@ export default function Layout({ children }) {
           top: 0,
           zIndex: 1000,
           gap: isMobile ? '0.75rem' : 'clamp(1rem, 2vw, 2rem)',
-          flexWrap: isMobile ? 'wrap' : 'nowrap'
+          flexWrap: 'nowrap'
         }}
       >
         <Link to="/" style={{ 
@@ -187,65 +199,31 @@ export default function Layout({ children }) {
           </>
         )}
         
-        {/* Mobile Navigation - 2 rows */}
+        {/* Mobile: Hamburger Menu Button + Icons */}
         {isMobile && (
-          <div style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem'
-          }}>
-            {/* Row 1: Primary Links */}
+          <>
             <div style={{
               display: 'flex',
-              justifyContent: 'space-around',
-              gap: '0.5rem',
-              width: '100%'
-            }}>
-              {primaryLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  style={{
-                    color: '#1976d2',
-                    textDecoration: 'none',
-                    fontWeight: 'bold',
-                    fontSize: '0.9rem',
-                    padding: '0.5rem',
-                    textAlign: 'center',
-                    flex: 1
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-            
-            {/* Row 2: Secondary Actions + More */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-around',
               alignItems: 'center',
-              gap: '0.5rem',
-              width: '100%'
+              gap: '1rem',
+              marginLeft: 'auto'
             }}>
+              {/* Wishlist Icon */}
               <Link to="/wishlist" style={{
                 color: '#1976d2',
                 textDecoration: 'none',
-                fontWeight: 'bold',
-                fontSize: '1.1rem',
+                fontSize: '1.5rem',
                 position: 'relative',
-                padding: '0.5rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.25rem'
+                padding: '0.5rem'
               }}>
-                💝 Wishlist
+                💝
                 {wishlistCount > 0 && (
                   <span style={{
                     position: 'absolute',
-                    top: '0',
-                    right: '-5px',
+                    top: '2px',
+                    right: '0',
                     background: '#ff4444',
                     color: 'white',
                     borderRadius: '50%',
@@ -254,30 +232,30 @@ export default function Layout({ children }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '0.7rem'
+                    fontSize: '0.65rem',
+                    fontWeight: 'bold'
                   }}>
                     {wishlistCount}
                   </span>
                 )}
               </Link>
               
+              {/* Cart Icon */}
               <Link to="/cart" style={{
                 color: '#1976d2',
                 textDecoration: 'none',
-                fontWeight: 'bold',
-                fontSize: '1.1rem',
+                fontSize: '1.5rem',
                 position: 'relative',
-                padding: '0.5rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.25rem'
+                padding: '0.5rem'
               }}>
-                🛒 Cart
+                �
                 {cart.length > 0 && (
                   <span style={{
                     position: 'absolute',
-                    top: '0',
-                    right: '-5px',
+                    top: '2px',
+                    right: '0',
                     background: '#FFD700',
                     color: '#222',
                     borderRadius: '50%',
@@ -286,68 +264,194 @@ export default function Layout({ children }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '0.7rem'
+                    fontSize: '0.65rem',
+                    fontWeight: 'bold'
                   }}>
                     {cart.length}
                   </span>
                 )}
               </Link>
               
-              <div style={{ position: 'relative' }}>
-                <button
-                  onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-                  style={{
-                    color: '#1976d2',
-                    background: 'none',
-                    border: 'none',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    fontSize: '1.1rem',
-                    padding: '0.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem'
-                  }}
-                >
-                  ⋯ More
-                </button>
+              {/* Hamburger Menu Button */}
+              <button
+                className="hamburger-btn"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '0.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                  width: '30px'
+                }}
+              >
+                <span style={{
+                  width: '100%',
+                  height: '3px',
+                  background: '#1976d2',
+                  borderRadius: '2px',
+                  transition: 'all 0.3s',
+                  transform: mobileMenuOpen ? 'rotate(45deg) translateY(10px)' : 'none'
+                }}></span>
+                <span style={{
+                  width: '100%',
+                  height: '3px',
+                  background: '#1976d2',
+                  borderRadius: '2px',
+                  transition: 'all 0.3s',
+                  opacity: mobileMenuOpen ? 0 : 1
+                }}></span>
+                <span style={{
+                  width: '100%',
+                  height: '3px',
+                  background: '#1976d2',
+                  borderRadius: '2px',
+                  transition: 'all 0.3s',
+                  transform: mobileMenuOpen ? 'rotate(-45deg) translateY(-10px)' : 'none'
+                }}></span>
+              </button>
+            </div>
+            
+            {/* Mobile Menu Drawer */}
+            {mobileMenuOpen && (
+              <>
+                {/* Backdrop */}
+                <div style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  zIndex: 999,
+                  animation: 'fadeIn 0.3s ease-in-out'
+                }} onClick={() => setMobileMenuOpen(false)} />
                 
-                {moreMenuOpen && (
+                {/* Drawer */}
+                <div className="mobile-menu" style={{
+                  position: 'fixed',
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: '80%',
+                  maxWidth: '320px',
+                  background: 'white',
+                  zIndex: 1000,
+                  boxShadow: '-4px 0 12px rgba(0, 0, 0, 0.15)',
+                  overflowY: 'auto',
+                  animation: 'slideIn 0.3s ease-out',
+                  padding: '2rem 0'
+                }}>
+                  <style>{`
+                    @keyframes slideIn {
+                      from {
+                        transform: translateX(100%);
+                      }
+                      to {
+                        transform: translateX(0);
+                      }
+                    }
+                    @keyframes fadeIn {
+                      from {
+                        opacity: 0;
+                      }
+                      to {
+                        opacity: 1;
+                      }
+                    }
+                  `}</style>
+                  
+                  {/* Menu Header */}
                   <div style={{
-                    position: 'absolute',
-                    top: '100%',
-                    right: 0,
-                    marginTop: '0.5rem',
-                    background: 'white',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                    minWidth: '200px',
-                    overflow: 'hidden',
-                    zIndex: 2000
+                    padding: '0 1.5rem 1.5rem',
+                    borderBottom: '2px solid #f0f0f0'
                   }}>
-                    {secondaryLinks.map(link => (
+                    <h2 style={{
+                      margin: 0,
+                      fontSize: '1.5rem',
+                      color: '#1976d2',
+                      fontWeight: 'bold'
+                    }}>Menu</h2>
+                  </div>
+                  
+                  {/* Primary Links */}
+                  <div style={{ padding: '1rem 0' }}>
+                    {primaryLinks.map(link => (
                       <Link
                         key={link.to}
                         to={link.to}
-                        onClick={() => setMoreMenuOpen(false)}
+                        onClick={() => setMobileMenuOpen(false)}
                         style={{
                           display: 'block',
                           padding: '1rem 1.5rem',
-                          color: '#1976d2',
+                          color: '#222',
                           textDecoration: 'none',
                           fontWeight: '600',
-                          borderBottom: '1px solid #f0f0f0',
-                          fontSize: '1rem'
+                          fontSize: '1.1rem',
+                          borderBottom: '1px solid #f5f5f5',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.background = '#f5f7fa';
+                          e.target.style.color = '#1976d2';
+                          e.target.style.paddingLeft = '2rem';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.background = 'white';
+                          e.target.style.color = '#222';
+                          e.target.style.paddingLeft = '1.5rem';
                         }}
                       >
                         {link.label}
                       </Link>
                     ))}
                   </div>
-                )}
-              </div>
-            </div>
-          </div>
+                  
+                  {/* Divider */}
+                  <div style={{
+                    height: '8px',
+                    background: '#f5f7fa',
+                    margin: '0.5rem 0'
+                  }}></div>
+                  
+                  {/* Secondary Links */}
+                  <div style={{ padding: '1rem 0' }}>
+                    {secondaryLinks.map(link => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        onClick={() => setMobileMenuOpen(false)}
+                        style={{
+                          display: 'block',
+                          padding: '1rem 1.5rem',
+                          color: '#666',
+                          textDecoration: 'none',
+                          fontWeight: '500',
+                          fontSize: '1rem',
+                          borderBottom: '1px solid #f5f5f5',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.background = '#f5f7fa';
+                          e.target.style.color = '#1976d2';
+                          e.target.style.paddingLeft = '2rem';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.background = 'white';
+                          e.target.style.color = '#666';
+                          e.target.style.paddingLeft = '1.5rem';
+                        }}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </>
         )}
           
           {/* Desktop Wishlist and Cart Links */}

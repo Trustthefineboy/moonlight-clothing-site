@@ -1,0 +1,30 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/.vscode": false,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.git": true
+    },
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/dist/**": true,
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": false,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000
+  }
+}

@@ -30,6 +30,19 @@ export default function Shop() {
   const [selectedStoryTheme, setSelectedStoryTheme] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('');
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) setFiltersOpen(true); // Always show filters on desktop
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -52,27 +65,28 @@ export default function Shop() {
     <div style={{ 
       maxWidth: 1400, 
       margin: '0 auto', 
-      padding: '2rem'
+      padding: isMobile ? '1rem' : '2rem'
     }}>
       {/* Header */}
       <div style={{ 
-        marginBottom: '2rem',
+        marginBottom: isMobile ? '1.5rem' : '2rem',
         textAlign: 'center'
       }}>
         <h1 style={{ 
-          fontSize: 'clamp(2rem, 5vw, 3rem)', 
-          marginBottom: '1rem',
+          fontSize: 'clamp(1.75rem, 5vw, 3rem)', 
+          marginBottom: '0.75rem',
           color: '#222'
         }}>
           Moonlight Collections
         </h1>
         <p style={{
-          fontSize: 'clamp(1rem, 2vw, 1.3rem)',
+          fontSize: 'clamp(0.95rem, 2vw, 1.3rem)',
           color: '#666',
           maxWidth: '700px',
           margin: '0 auto 1.5rem',
           lineHeight: 1.6,
-          fontStyle: 'italic'
+          fontStyle: 'italic',
+          padding: isMobile ? '0 0.5rem' : '0'
         }}>
           "Each Moonlight fabric carries a story, a covenant of creativity. Choose yours — wear your light."
         </p>
@@ -83,59 +97,110 @@ export default function Shop() {
         <SearchBar onSearch={handleSearch} />
       </div>
 
-      {/* Filters Section */}
-      <div style={{ 
-        backgroundColor: '#f8f9fa',
-        padding: '1.5rem',
-        borderRadius: '12px',
-        marginBottom: '2rem',
-        border: '1px solid #e0e0e0'
-      }}>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: '1rem'
-        }}>
-          <h3 style={{ 
-            margin: 0,
+      {/* Mobile Filter Toggle Button */}
+      {isMobile && (
+        <button
+          onClick={() => setFiltersOpen(!filtersOpen)}
+          style={{
+            width: '100%',
+            padding: '1rem',
+            marginBottom: '1rem',
+            background: '#1976d2',
+            color: 'white',
+            border: 'none',
+            borderRadius: '12px',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            transition: 'all 0.3s'
+          }}
+        >
+          <span>🔍 Filters & Sorting {hasActiveFilters && `(${Object.values({ selectedCategory, selectedGender, selectedType, selectedCulture, selectedColorTheme, selectedStoryTheme, sortBy }).filter(Boolean).length})`}</span>
+          <span style={{ 
             fontSize: '1.2rem',
-            color: '#222'
+            transform: filtersOpen ? 'rotate(180deg)' : 'rotate(0)',
+            transition: 'transform 0.3s'
+          }}>▼</span>
+        </button>
+      )}
+
+      {/* Filters Section */}
+      {(!isMobile || filtersOpen) && (
+        <div style={{ 
+          backgroundColor: '#f8f9fa',
+          padding: isMobile ? '1rem' : '1.5rem',
+          borderRadius: '12px',
+          marginBottom: isMobile ? '1rem' : '2rem',
+          border: '1px solid #e0e0e0',
+          animation: isMobile && filtersOpen ? 'slideDown 0.3s ease-out' : 'none'
+        }}>
+          <style>{`
+            @keyframes slideDown {
+              from {
+                opacity: 0;
+                transform: translateY(-10px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+          
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            marginBottom: '1rem',
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}>
-            🔍 Filters & Sorting
-          </h3>
-          {hasActiveFilters && (
-            <button
-              onClick={clearFilters}
-              style={{
-                background: 'transparent',
-                border: '2px solid #ff4444',
-                color: '#ff4444',
-                padding: '0.5rem 1rem',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                fontSize: '0.9rem',
-                transition: 'all 0.3s'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#ff4444';
-                e.target.style.color = 'white';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#ff4444';
-              }}
-            >
-              Clear All Filters
-            </button>
-          )}
-        </div>
+            {!isMobile && (
+              <h3 style={{ 
+                margin: 0,
+                fontSize: '1.2rem',
+                color: '#222'
+              }}>
+                🔍 Filters & Sorting
+              </h3>
+            )}
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                style={{
+                  background: 'transparent',
+                  border: '2px solid #ff4444',
+                  color: '#ff4444',
+                  padding: isMobile ? '0.6rem 1.2rem' : '0.5rem 1rem',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: isMobile ? '0.95rem' : '0.9rem',
+                  transition: 'all 0.3s',
+                  width: isMobile ? '100%' : 'auto'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#ff4444';
+                  e.target.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.color = '#ff4444';
+                }}
+              >
+                Clear All Filters
+              </button>
+            )}
+          </div>
         
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: isMobile ? '0.75rem' : '1rem', flexWrap: 'wrap' }}>
           <style>{`
             select.shop-select {
-              padding: 0.75rem 1.25rem;
+              padding: ${isMobile ? '0.85rem 1rem' : '0.75rem 1.25rem'};
               border-radius: 8px;
               border: 2px solid #FFD700;
               background: #fff;
@@ -145,7 +210,7 @@ export default function Shop() {
               box-shadow: 0 2px 8px rgba(34,34,34,0.04);
               outline: none;
               cursor: pointer;
-              font-size: 0.95rem;
+              font-size: ${isMobile ? '1rem' : '0.95rem'};
             }
             select.shop-select:focus, select.shop-select:hover {
               border-color: #222;
@@ -155,7 +220,7 @@ export default function Shop() {
           `}</style>
           
           {/* Category Filter */}
-          <div style={{ flex: 1, minWidth: '200px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '200px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
@@ -179,11 +244,11 @@ export default function Shop() {
           </div>
 
           {/* Gender Filter */}
-          <div style={{ flex: 1, minWidth: '150px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '150px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.95rem' : '0.9rem',
               fontWeight: 'bold',
               color: '#555'
             }}>
@@ -203,11 +268,11 @@ export default function Shop() {
           </div>
 
           {/* Type Filter */}
-          <div style={{ flex: 1, minWidth: '150px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '150px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.95rem' : '0.9rem',
               fontWeight: 'bold',
               color: '#555'
             }}>
@@ -227,11 +292,11 @@ export default function Shop() {
           </div>
 
           {/* Sort By */}
-          <div style={{ flex: 1, minWidth: '200px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '200px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.95rem' : '0.9rem',
               fontWeight: 'bold',
               color: '#555'
             }}>
@@ -253,11 +318,11 @@ export default function Shop() {
           </div>
 
           {/* Culture Filter */}
-          <div style={{ flex: 1, minWidth: '180px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '180px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.95rem' : '0.9rem',
               fontWeight: 'bold',
               color: '#555'
             }}>
@@ -277,11 +342,11 @@ export default function Shop() {
           </div>
 
           {/* Color Theme Filter */}
-          <div style={{ flex: 1, minWidth: '180px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '180px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.95rem' : '0.9rem',
               fontWeight: 'bold',
               color: '#555'
             }}>
@@ -301,7 +366,7 @@ export default function Shop() {
           </div>
 
           {/* Story Theme Filter */}
-          <div style={{ flex: 1, minWidth: '180px' }}>
+          <div style={{ flex: 1, minWidth: isMobile ? '100%' : '180px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '0.5rem',
@@ -324,7 +389,8 @@ export default function Shop() {
             </select>
           </div>
         </div>
-      </div>
+        </div>
+      )}
 
       {/* Product List */}
       <FabricList filter={{ 

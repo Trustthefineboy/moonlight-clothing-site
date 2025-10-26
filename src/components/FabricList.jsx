@@ -13,9 +13,17 @@ export default function FabricList({ filter = {} }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { addToast } = useToast();
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     // Using shared products data
@@ -107,16 +115,27 @@ export default function FabricList({ filter = {} }) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', margin: 0, color: '#222' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: isMobile ? '1rem' : '2rem',
+        flexWrap: 'wrap',
+        gap: '0.5rem'
+      }}>
+        <h2 style={{ 
+          fontSize: isMobile ? '1.5rem' : '2rem', 
+          margin: 0, 
+          color: '#222' 
+        }}>
           {filter.search ? `Search Results for "${filter.search}"` : 'Available Products'}
         </h2>
         <div style={{ 
-          fontSize: '1.1rem', 
+          fontSize: isMobile ? '0.95rem' : '1.1rem', 
           color: '#666', 
           fontWeight: 'bold',
           backgroundColor: '#FFD700',
-          padding: '0.5rem 1rem',
+          padding: isMobile ? '0.4rem 0.9rem' : '0.5rem 1rem',
           borderRadius: '20px',
           color: '#222'
         }}>
@@ -150,8 +169,8 @@ export default function FabricList({ filter = {} }) {
       ) : (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          gap: '2rem'
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: isMobile ? '1.5rem' : '2rem'
         }}>
           {filtered.map(fabric => (
           <div
@@ -190,18 +209,18 @@ export default function FabricList({ filter = {} }) {
               }}
               style={{
                 position: 'absolute',
-                top: '0.75rem',
-                right: '0.75rem',
+                top: isMobile ? '0.5rem' : '0.75rem',
+                right: isMobile ? '0.5rem' : '0.75rem',
                 background: 'rgba(255, 255, 255, 0.9)',
                 border: 'none',
                 borderRadius: '50%',
-                width: '2.5rem',
-                height: '2.5rem',
+                width: isMobile ? '3rem' : '2.5rem',
+                height: isMobile ? '3rem' : '2.5rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                fontSize: '1.5rem',
+                fontSize: isMobile ? '1.6rem' : '1.5rem',
                 zIndex: 2,
                 transition: 'all 0.3s',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
@@ -221,7 +240,7 @@ export default function FabricList({ filter = {} }) {
             
             <div style={{
               width: '100%',
-              height: 280,
+              height: isMobile ? 250 : 280,
               overflow: 'hidden',
               backgroundColor: '#f5f5f5',
               position: 'relative'
@@ -240,9 +259,14 @@ export default function FabricList({ filter = {} }) {
                 }}
               />
             </div>
-            <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ 
+              padding: isMobile ? '1rem' : '1.25rem', 
+              flex: 1, 
+              display: 'flex', 
+              flexDirection: 'column' 
+            }}>
               <h3 style={{ 
-                fontSize: '1.15rem',
+                fontSize: isMobile ? '1.1rem' : '1.15rem',
                 marginBottom: '0.75rem',
                 color: '#222',
                 fontWeight: 'bold',
@@ -315,12 +339,13 @@ export default function FabricList({ filter = {} }) {
                   backgroundColor: '#25D366',
                   color: 'white',
                   fontWeight: 'bold',
-                  padding: '0.75rem',
+                  padding: isMobile ? '0.9rem' : '0.75rem',
                   borderRadius: 8,
                   textDecoration: 'none',
                   marginBottom: '0.75rem',
                   transition: 'all 0.3s',
-                  fontSize: '0.95rem'
+                  fontSize: isMobile ? '1rem' : '0.95rem',
+                  minHeight: isMobile ? '48px' : 'auto'
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.backgroundColor = '#128C7E';
@@ -342,12 +367,13 @@ export default function FabricList({ filter = {} }) {
                       backgroundColor: '#4f8cff',
                       color: '#fff',
                       fontWeight: 'bold',
-                      padding: '0.75rem',
+                      padding: isMobile ? '0.9rem' : '0.75rem',
                       border: 'none',
                       borderRadius: 8,
                       cursor: 'pointer',
                       transition: 'all 0.3s',
-                      fontSize: '0.95rem'
+                      fontSize: isMobile ? '1rem' : '0.95rem',
+                      minHeight: isMobile ? '48px' : 'auto'
                     }}
                     onMouseOver={(e) => {
                       e.currentTarget.style.backgroundColor = '#3a7bd5';
@@ -368,12 +394,13 @@ export default function FabricList({ filter = {} }) {
                       background: '#FFD700',
                       color: '#111',
                       fontWeight: 'bold',
-                      padding: '0.75rem',
+                      padding: isMobile ? '0.9rem' : '0.75rem',
                       border: 'none',
                       borderRadius: 8,
                       cursor: 'pointer',
                       transition: 'all 0.3s',
-                      fontSize: '0.95rem'
+                      fontSize: isMobile ? '1rem' : '0.95rem',
+                      minHeight: isMobile ? '48px' : 'auto'
                     }}
                     onMouseOver={(e) => {
                       e.currentTarget.style.background = '#222';
