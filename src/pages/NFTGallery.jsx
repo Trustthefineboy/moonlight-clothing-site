@@ -30,32 +30,34 @@ export default function NFTGallery() {
         {/* Header */}
         <div style={{
           textAlign: 'center',
-          marginBottom: '3rem',
-          paddingTop: '2rem'
+          marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem',
+          paddingTop: window.innerWidth < 768 ? '0.5rem' : '2rem'
         }}>
           <h1 style={{
-            fontSize: window.innerWidth < 768 ? '2rem' : '3rem',
+            fontSize: window.innerWidth < 768 ? '1.5rem' : '3rem',
             fontWeight: 'bold',
             background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            marginBottom: '1rem'
+            marginBottom: window.innerWidth < 768 ? '0.5rem' : '1rem'
           }}>
             ✨ Moonlight Digital Vault
           </h1>
           <p style={{
-            fontSize: '1.1rem',
+            fontSize: window.innerWidth < 768 ? '0.9rem' : '1.1rem',
             color: '#d1d5db',
             maxWidth: '800px',
             margin: '0 auto 0.5rem',
-            lineHeight: '1.6'
+            lineHeight: '1.6',
+            display: window.innerWidth < 768 ? 'none' : 'block'
           }}>
             Where Sacred Fabrics Meet Eternal Blockchain
           </p>
           <p style={{
             fontSize: '0.9rem',
             color: '#9ca3af',
-            fontStyle: 'italic'
+            fontStyle: 'italic',
+            display: window.innerWidth < 768 ? 'none' : 'block'
           }}>
             Preserving African heritage, one divine design at a time
           </p>
@@ -63,7 +65,7 @@ export default function NFTGallery() {
 
         {/* Search Bar */}
         <div style={{
-          marginBottom: '2rem',
+          marginBottom: window.innerWidth < 768 ? '1rem' : '2rem',
           display: 'flex',
           justifyContent: 'center'
         }}>
@@ -75,12 +77,12 @@ export default function NFTGallery() {
             style={{
               width: '100%',
               maxWidth: '600px',
-              padding: '1rem 1.5rem',
+              padding: window.innerWidth < 768 ? '0.75rem 1rem' : '1rem 1.5rem',
               background: 'rgba(255, 255, 255, 0.05)',
               border: '2px solid rgba(245, 158, 11, 0.3)',
               borderRadius: '50px',
               color: '#f5f5f5',
-              fontSize: '1rem',
+              fontSize: window.innerWidth < 768 ? '0.9rem' : '1rem',
               outline: 'none',
               transition: 'all 0.3s'
             }}
@@ -93,8 +95,8 @@ export default function NFTGallery() {
         <div style={{
           display: 'flex',
           flexDirection: window.innerWidth < 768 ? 'column' : 'row',
-          gap: '1rem',
-          marginBottom: '3rem',
+          gap: window.innerWidth < 768 ? '0.75rem' : '1rem',
+          marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem',
           flexWrap: 'wrap'
         }}>
           {/* Collection Filter */}
