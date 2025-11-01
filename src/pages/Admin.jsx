@@ -9,9 +9,9 @@ export default function Admin() {
   const { showToast } = useToast();
   
   // Admin emails - only these users can access admin panel
-  const ADMIN_EMAILS = ['uzoigwetrust5@gmail.com', 'admin@moonlightclothings.com'];
+  const ADMIN_EMAILS = ['uzoigwetrust5@gmail.com'];
   
-  const [activeTab, setActiveTab] = useState('products');
+  const [activeTab, setActiveTab] = useState('analytics');
   
   // Check if user is admin
   useEffect(() => {
@@ -32,6 +32,14 @@ export default function Admin() {
   const [orders, setOrders] = useState([]);
   const [newsletters, setNewsletters] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [analytics, setAnalytics] = useState({
+    totalRevenue: 0,
+    onlineOrders: 0,
+    whatsappOrders: 0,
+    totalOrders: 0,
+    pendingOrders: 0,
+    completedOrders: 0
+  });
 
   const [productForm, setProductForm] = useState({
     name: '',
@@ -59,9 +67,14 @@ export default function Admin() {
         const res = await fetch('http://localhost:3001/api/reviews/all');
         const data = await res.json();
         setReviews(data.reviews || []);
-      } else if (activeTab === 'orders') {
+      } else if (activeTab === 'orders' || activeTab === 'analytics') {
+        // Fetch from localStorage (includes both online and WhatsApp orders)
         const saved = localStorage.getItem('moonlight-orders');
-        setOrders(saved ? JSON.parse(saved) : []);
+        const localOrders = saved ? JSON.parse(saved) : [];
+        setOrders(localOrders);
+        
+        // Calculate analytics
+        calculateAnalytics(localOrders);
       } else if (activeTab === 'newsletter') {
         const res = await fetch('http://localhost:3001/api/newsletter/subscribers');
         const data = await res.json();
@@ -76,9 +89,45 @@ export default function Admin() {
       } else if (activeTab === 'newsletter') {
         const saved = localStorage.getItem('newsletter-subscribers');
         setNewsletters(saved ? JSON.parse(saved).map(email => ({ email })) : []);
+      } else if (activeTab === 'orders' || activeTab === 'analytics') {
+        const saved = localStorage.getItem('moonlight-orders');
+        const localOrders = saved ? JSON.parse(saved) : [];
+        setOrders(localOrders);
+        calculateAnalytics(localOrders);
       }
     }
     setLoading(false);
+  };
+
+  const calculateAnalytics = (ordersList) => {
+    const stats = {
+      totalRevenue: 0,
+      onlineOrders: 0,
+      whatsappOrders: 0,
+      totalOrders: ordersList.length,
+      pendingOrders: 0,
+      completedOrders: 0
+    };
+
+    ordersList.forEach(order => {
+      stats.totalRevenue += order.total || 0;
+      
+      // Count by payment method (WhatsApp orders might be marked differently)
+      if (order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp') {
+        stats.whatsappOrders++;
+      } else {
+        stats.onlineOrders++;
+      }
+      
+      // Count by status
+      if (order.orderStatus === 'delivered' || order.orderStatus === 'completed') {
+        stats.completedOrders++;
+      } else {
+        stats.pendingOrders++;
+      }
+    });
+
+    setAnalytics(stats);
   };
 
   const handleProductSubmit = async (e) => {
@@ -218,19 +267,160 @@ export default function Admin() {
       </div>
 
       <div style={styles.tabs}>
-        <button style={styles.tab(activeTab === 'products')} onClick={() => setActiveTab('products')}>
-          📦 Products
-        </button>
-        <button style={styles.tab(activeTab === 'reviews')} onClick={() => setActiveTab('reviews')}>
-          ⭐ Reviews
+        <button style={styles.tab(activeTab === 'analytics')} onClick={() => setActiveTab('analytics')}>
+          � Sales Analytics
         </button>
         <button style={styles.tab(activeTab === 'orders')} onClick={() => setActiveTab('orders')}>
           🛍️ Orders
+        </button>
+        <button style={styles.tab(activeTab === 'products')} onClick={() => setActiveTab('products')}>
+          � Products
+        </button>
+        <button style={styles.tab(activeTab === 'reviews')} onClick={() => setActiveTab('reviews')}>
+          ⭐ Reviews
         </button>
         <button style={styles.tab(activeTab === 'newsletter')} onClick={() => setActiveTab('newsletter')}>
           📧 Newsletter
         </button>
       </div>
+
+      {activeTab === 'analytics' && (
+        <div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '1.5rem',
+            marginBottom: '2rem'
+          }}>
+            {/* Total Revenue Card */}
+            <div style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(102,126,234,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>Total Revenue</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>₦{analytics.totalRevenue.toLocaleString()}</div>
+            </div>
+
+            {/* Total Orders Card */}
+            <div style={{
+              background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(240,147,251,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>Total Orders</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{analytics.totalOrders}</div>
+            </div>
+
+            {/* Online Orders Card */}
+            <div style={{
+              background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(79,172,254,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>Online Orders</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{analytics.onlineOrders}</div>
+            </div>
+
+            {/* WhatsApp Orders Card */}
+            <div style={{
+              background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(67,233,123,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>WhatsApp Orders</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{analytics.whatsappOrders}</div>
+            </div>
+
+            {/* Pending Orders Card */}
+            <div style={{
+              background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(250,112,154,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>Pending Orders</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{analytics.pendingOrders}</div>
+            </div>
+
+            {/* Completed Orders Card */}
+            <div style={{
+              background: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(48,207,208,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>Completed Orders</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{analytics.completedOrders}</div>
+            </div>
+          </div>
+
+          {/* Recent Orders Summary */}
+          <div style={styles.card}>
+            <h2 style={{ marginTop: 0 }}>Recent Orders Summary</h2>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    <th style={styles.th}>Order #</th>
+                    <th style={styles.th}>Customer</th>
+                    <th style={styles.th}>Items</th>
+                    <th style={styles.th}>Total</th>
+                    <th style={styles.th}>Payment Method</th>
+                    <th style={styles.th}>Status</th>
+                    <th style={styles.th}>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.slice(0, 10).map(order => (
+                    <tr key={order.orderNumber}>
+                      <td style={styles.td}>{order.orderNumber}</td>
+                      <td style={styles.td}>{order.customerInfo?.name}</td>
+                      <td style={styles.td}>{order.items?.length || 0}</td>
+                      <td style={{...styles.td, fontWeight: 'bold', color: '#4169E1'}}>
+                        ₦{order.total?.toLocaleString()}
+                      </td>
+                      <td style={styles.td}>
+                        <span style={{
+                          padding: '0.25rem 0.75rem',
+                          borderRadius: '12px',
+                          fontSize: '0.85rem',
+                          backgroundColor: order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp' ? '#dcf8c6' : '#e3f2fd',
+                          color: order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp' ? '#075e54' : '#1976d2'
+                        }}>
+                          {order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp' ? '📱 WhatsApp' : '💳 Online'}
+                        </span>
+                      </td>
+                      <td style={styles.td}>
+                        <span style={{
+                          padding: '0.25rem 0.75rem',
+                          borderRadius: '12px',
+                          fontSize: '0.85rem',
+                          backgroundColor: order.orderStatus === 'delivered' || order.orderStatus === 'completed' ? '#d4edda' : '#fff3cd',
+                          color: order.orderStatus === 'delivered' || order.orderStatus === 'completed' ? '#155724' : '#856404'
+                        }}>
+                          {order.orderStatus || 'pending'}
+                        </span>
+                      </td>
+                      <td style={styles.td}>{new Date(order.createdAt).toLocaleDateString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
 
       {activeTab === 'products' && (
         <div style={styles.card}>
@@ -394,14 +584,18 @@ export default function Admin() {
 
       {activeTab === 'orders' && (
         <div style={styles.card}>
-          <h2 style={{ marginTop: 0 }}>Orders ({orders.length})</h2>
+          <h2 style={{ marginTop: 0 }}>All Orders ({orders.length})</h2>
           <div style={{ overflowX: 'auto' }}>
             <table style={styles.table}>
               <thead>
                 <tr>
                   <th style={styles.th}>Order #</th>
                   <th style={styles.th}>Customer</th>
+                  <th style={styles.th}>Email</th>
+                  <th style={styles.th}>Phone</th>
+                  <th style={styles.th}>Items</th>
                   <th style={styles.th}>Total</th>
+                  <th style={styles.th}>Payment Method</th>
                   <th style={styles.th}>Status</th>
                   <th style={styles.th}>Date</th>
                 </tr>
@@ -411,8 +605,37 @@ export default function Admin() {
                   <tr key={order.orderNumber}>
                     <td style={styles.td}>{order.orderNumber}</td>
                     <td style={styles.td}>{order.customerInfo?.name}</td>
-                    <td style={styles.td}>₦{order.total?.toLocaleString()}</td>
-                    <td style={styles.td}>{order.orderStatus || 'pending'}</td>
+                    <td style={styles.td}>{order.customerInfo?.email}</td>
+                    <td style={styles.td}>{order.customerInfo?.phone}</td>
+                    <td style={styles.td}>
+                      {order.items?.map(item => item.name).join(', ').substring(0, 50)}
+                      {order.items?.map(item => item.name).join(', ').length > 50 ? '...' : ''}
+                    </td>
+                    <td style={{...styles.td, fontWeight: 'bold', color: '#4169E1'}}>
+                      ₦{order.total?.toLocaleString()}
+                    </td>
+                    <td style={styles.td}>
+                      <span style={{
+                        padding: '0.25rem 0.75rem',
+                        borderRadius: '12px',
+                        fontSize: '0.85rem',
+                        backgroundColor: order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp' ? '#dcf8c6' : '#e3f2fd',
+                        color: order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp' ? '#075e54' : '#1976d2'
+                      }}>
+                        {order.paymentMethod === 'whatsapp' || order.orderSource === 'whatsapp' ? '📱 WhatsApp' : `💳 ${order.paymentMethod || 'Online'}`}
+                      </span>
+                    </td>
+                    <td style={styles.td}>
+                      <span style={{
+                        padding: '0.25rem 0.75rem',
+                        borderRadius: '12px',
+                        fontSize: '0.85rem',
+                        backgroundColor: order.orderStatus === 'delivered' || order.orderStatus === 'completed' ? '#d4edda' : order.orderStatus === 'cancelled' ? '#f8d7da' : '#fff3cd',
+                        color: order.orderStatus === 'delivered' || order.orderStatus === 'completed' ? '#155724' : order.orderStatus === 'cancelled' ? '#721c24' : '#856404'
+                      }}>
+                        {order.orderStatus || 'pending'}
+                      </span>
+                    </td>
                     <td style={styles.td}>{new Date(order.createdAt).toLocaleDateString()}</td>
                   </tr>
                 ))}
