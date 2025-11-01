@@ -22,7 +22,7 @@ export const productsData = [
   {
     id: 2,
     name: 'Covenant Black Jacket',
-    price: 35000,
+    price: 44500,
     story: 'Stylish black jacket with covenant symbols. Premium quality fabric for modern sophistication.',
     proverb: '"A covenant is not a contract — it is a sacred bond sewn into eternity."',
     image: '/images/covenant-black-jacket.jpg',
@@ -41,7 +41,7 @@ export const productsData = [
   {
     id: 3,
     name: 'Covenant Black Kaftan',
-    price: 30000,
+    price: 84500,
     story: 'Traditional black kaftan with covenant patterns. Elegant and comfortable for all occasions.',
     proverb: '"Light is not sewn — it is revealed."',
     image: '/images/covenant-black-kaftan.jpg',
@@ -98,7 +98,7 @@ export const productsData = [
   {
     id: 6,
     name: 'Covenant Blue Set',
-    price: 45000,
+    price: 74500,
     story: 'Complete blue two-piece set with covenant designs. Stylish and coordinated.',
     proverb: '"Two pieces, one spirit — unity woven by divine hands."',
     image: '/images/covenant-blue-set.jpg',
@@ -136,7 +136,7 @@ export const productsData = [
   {
     id: 8,
     name: 'Guardian White Kaftan',
-    price: 32000,
+    price: 84500,
     story: 'Pure white kaftan from the Guardian collection. Spiritual and refined.',
     proverb: '"In white lies the beginning of all wisdom."',
     image: '/images/guardian-white-kaftan.jpg',
@@ -174,7 +174,7 @@ export const productsData = [
   {
     id: 10,
     name: 'Green Yellow Two Piece',
-    price: 48000,
+    price: 74500,
     story: 'Complete green and yellow two-piece set. Bold colors with traditional patterns.',
     proverb: '"The sun and the earth meet in sacred fabric."',
     image: '/images/green-yellow-two-piece.jpg',
@@ -193,7 +193,7 @@ export const productsData = [
   {
     id: 11,
     name: 'White Three Piece Set',
-    price: 55000,
+    price: 69500,
     story: 'Premium white three-piece set. Complete elegance for special occasions.',
     proverb: '"Purity is not the absence of color — it is the presence of God."',
     image: '/images/white-three-piece-set.jpg',
@@ -212,7 +212,7 @@ export const productsData = [
   {
     id: 12,
     name: 'Brown Adinkra Kaftan',
-    price: 34000,
+    price: 84500,
     story: 'Rich brown kaftan with intricate Adinkra symbols. Traditional craftsmanship meets modern style.',
     proverb: '"The earth speaks through fabric — listen closely."',
     image: '/images/brown-adinkra-kaftan.jpg',
@@ -326,7 +326,7 @@ export const productsData = [
   {
     id: 19,
     name: 'Indigo Path White Kaftan',
-    price: 31000,
+    price: 84500,
     story: 'Elegant white kaftan from the Indigo Path series. Spiritual journey meets timeless elegance.',
     proverb: '"Walk the path of light — let your fabric tell the story."',
     image: '/images/indigo-path-white-kaftan.jpg',
@@ -345,7 +345,7 @@ export const productsData = [
   {
     id: 21,
     name: 'Guardian Blue Fabric',
-    price: 42000,
+    price: 84500,
     story: 'Premium blue fabric piece from the Guardian collection. Exclusive material with protective symbolism.',
     proverb: '"The guardian sees all, protects all, through sacred cloth."',
     image: '/images/guardian-blue-fabric.jpg',
@@ -364,7 +364,7 @@ export const productsData = [
   {
     id: 25,
     name: 'Yoruba Kingdom - Ancient Wisdom',
-    price: 1600000,
+    price: 74500,
     story: 'The ancient Yoruba civilization carries profound wisdom in every thread. This sacred set features bronze panels depicting royal ceremonies and the sacred text "NO MORE DEBTS" - a divine proclamation of freedom and prosperity.',
     proverb: '"Wisdom is not written — it is woven into the sacred cloth of our ancestors."',
     image: '/images/Screenshot 2025-10-16 081215.png',
@@ -383,7 +383,7 @@ export const productsData = [
   {
     id: 26,
     name: 'Cowrie Shell Elegance - Sacred Currency',
-    price: 1100000,
+    price: 74500,
     story: 'Before paper, before coins, there were cowrie shells - the original African currency that spread across continents. This elegant design honors the sacred cowrie shell patterns that represent wealth, prosperity, and divine protection.',
     proverb: '"The cowrie shell speaks the language of abundance across all lands."',
     image: '/images/Screenshot 2025-10-16 081234.png',
@@ -421,7 +421,7 @@ export const productsData = [
   {
     id: 28,
     name: 'Mansa Musa - Golden Age of Mali',
-    price: 4000000,
+    price: 69500,
     story: 'Mansa Musa, the wealthiest person in recorded history, ruler of the Mali Empire from 1312-1337 CE. This luxurious design celebrates the golden age of African prosperity, Islamic scholarship, and the power of generosity.',
     proverb: '"True wealth is not kept — it is shared and woven into legacy."',
     image: '/images/Screenshot 2025-10-16 081321.png',
@@ -440,7 +440,7 @@ export const productsData = [
   {
     id: 29,
     name: 'Adire - Sacred Geometry',
-    price: 1300000,
+    price: 74500,
     story: 'Adire, the ancient Yoruba art of indigo-dyed cloth, where each pattern is a prayer, each line a blessing. This vibrant design showcases the traditional tie-dye technique passed down through generations of master craftswomen.',
     proverb: '"Patterns are prayers, each thread a sacred blessing from our mothers."',
     image: '/images/Screenshot 2025-10-16 081340.png',
@@ -459,7 +459,7 @@ export const productsData = [
   {
     id: 30,
     name: 'South Africa - Unity in Diversity',
-    price: 1500000,
+    price: 74500,
     story: 'Celebrating the Rainbow Nation - South Africa\'s rich tapestry of cultures, languages, and traditions. This powerful design features tribal drums and indigenous patterns that echo across the plains and mountains.',
     proverb: '"Ubuntu — I am because we are, woven in the fabric of unity."',
     image: '/images/Screenshot 2025-10-16 080946.png',
@@ -478,7 +478,7 @@ export const productsData = [
   {
     id: 31,
     name: 'Osupa Ale - Night Moon',
-    price: 1000000,
+    price: 74500,
     story: 'Osupa Ale - the sacred night moon in Yoruba cosmology. When the sun rests, the moon rises to guide the dreamers, protect the travelers, and whisper ancient secrets to those who listen.',
     proverb: '"The moon does not compete with the sun — it guards the sacred night."',
     image: '/images/Screenshot 2025-10-16 081133.png',
@@ -497,7 +497,7 @@ export const productsData = [
   {
     id: 32,
     name: 'Birds of Paradise - Nature\'s Symphony',
-    price: 900000,
+    price: 74500,
     story: 'When the birds gather at sunset, they sing songs older than memory. This breathtaking design captures exotic birds in flight against a golden sunset sky. Each bird represents a prayer, a blessing, a story carried on wings across generations.',
     proverb: '"Freedom is not given — it is worn on wings of sacred cloth."',
     image: '/images/Screenshot 2025-10-16 081153.png',
@@ -516,7 +516,7 @@ export const productsData = [
   {
     id: 33,
     name: 'The Gift of Silence - Inner Peace',
-    price: 800000,
+    price: 74500,
     story: 'In a world of noise, silence becomes the greatest gift. This meditative design embodies tranquility, contemplation, and the sacred space within. Clean lines, pure form, and subtle elegance create a garment for those who walk the path of inner knowledge.',
     proverb: '"Silence is not absence — it is the presence of divine peace."',
     image: '/images/Screenshot 2025-10-16 081541.png',
@@ -535,7 +535,7 @@ export const productsData = [
   {
     id: 34,
     name: 'Orunshi - The Sun God Returns',
-    price: 1800000,
+    price: 74500,
     story: 'Orunshi, the sun deity that brings life to all existence. When the first light breaks the darkness, Orunshi rides his golden chariot across the sky, blessing the earth below. This radiant design captures solar power, divine energy, and the unstoppable force of daylight.',
     proverb: '"Light is not borrowed — it is woven into the fabric of existence."',
     image: '/images/Screenshot 2025-10-16 081602.png',
@@ -554,7 +554,7 @@ export const productsData = [
   {
     id: 35,
     name: 'Guardian of Earth - Ancestral Protection',
-    price: 1700000,
+    price: 74500,
     story: 'The earth needs guardians, protectors who stand between the sacred and the profane. This powerful design features ancestral warriors, protective symbols, and earth-tone patterns that ground you in purpose.',
     proverb: '"A guardian does not sleep — their spirit is woven into eternal vigilance."',
     image: '/images/Screenshot 2025-10-16 081404.png',
