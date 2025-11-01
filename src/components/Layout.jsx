@@ -12,6 +12,7 @@ const primaryLinks = [
   { to: '/nft-gallery', label: 'NFT VAULT' },
   { to: '/gallery', label: 'GALLERY' },
   { to: '/memories', label: 'MEMORIES' },
+  { to: '/reviews', label: 'REVIEWS' },
   { to: '/about', label: 'ABOUT' },
 ];
 
