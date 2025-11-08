@@ -402,7 +402,7 @@ export const productsData = [
   {
     id: 27,
     name: 'King Menes - The First Pharaoh',
-    price: 3000000,
+    price: 50000,
     story: 'King Menes, the legendary first Pharaoh who united Upper and Lower Egypt around 3100 BCE. This regal design captures ancient Egyptian artistry with golden hieroglyphs and royal imagery.',
     proverb: '"Unity is not conquered — it is woven by the hands of divine rulers."',
     image: '/images/Screenshot 2025-10-16 081302.png',
