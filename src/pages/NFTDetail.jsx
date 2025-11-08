@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { nftCollectibles, rarityLevels } from '../data/nftCollectibles';
 import { useToast } from '../components/ToastContext';
@@ -11,6 +11,11 @@ export default function NFTDetail() {
   const nft = nftCollectibles.find(n => n.id === nftId);
 
   const [quantity, setQuantity] = useState(1);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!nft) {
     return (
@@ -88,8 +93,7 @@ export default function NFTDetail() {
               boxShadow: `0 20px 60px ${rarityColor}40`,
               marginBottom: '1.5rem'
             }}>
-              <img src={assetSrc(nft.imageUrl)} alt={nft.name} style={{ width: '100%', height: window.innerWidth < 768 ? '300px' : '500px', objectFit: 'cover' }} />
-              {/* Replace with: <img src={assetSrc(nft.imageUrl)} alt={nft.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> */}
+              <img src={assetSrc(nft.imageUrl)} alt={nft.name} style={{ width: '100%', height: 'auto', maxHeight: '600px', objectFit: 'contain', display: 'block' }} />
             </div>
 
             {/* Attributes Grid */}
@@ -406,3 +410,6 @@ function BlockchainRow({ label, value }) {
     </div>
   );
 }
+
+
+
